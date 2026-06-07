@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDV Pro - Dark Mode Premium</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+    <link rel="stylesheet" href="style.css">
+    
+    <style>
+        @keyframes slideUp { 
+            from { transform: translateY(100%); opacity: 0; } 
+            to { transform: translateY(0); opacity: 1; } 
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="sidebar">
+        <div class="brand"><i class='bx bx-store-alt'></i> PDV Pro</div>
+
+        <button class="menu-item active" onclick="closeAllModals(); document.getElementById('productInput').focus();">
+            <i class='bx bx-cart'></i> Venda <span class="menu-shortcut">F1</span>
+        </button>
+
+        <button class="menu-item" onclick="abrirPainelCaixa()" id="btn-menu-caixa">
+            <i class='bx bx-wallet'></i> Controle de Caixa <span class="menu-shortcut">F2</span>
+        </button>
+
+        <button class="menu-item" onclick="openModal('modal-historico')">
+            <i class='bx bx-history'></i> Histórico <span class="menu-shortcut">F3</span>
+        </button>
+
+        <button class="menu-item" onclick="openModal('modal-clientes')" style="margin-top: auto;">
+            <i class='bx bx-user-plus'></i> Clientes
+        </button>
+    </nav>
+
+    <main class="main-content">
+        <div class="system-status-bar"
+            style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; color: var(--text-muted); font-size: 0.875rem;">
+            <div style="display: flex; gap: 1rem; align-items: center;">
+                <span id="sys-clock" style="font-weight: 500;"><i class='bx bx-time-five'></i> 00:00:00</span>
+                <span id="sys-date"><i class='bx bx-calendar'></i> --/--/----</span>
+            </div>
+            <div style="display: flex; gap: 1rem; align-items: center;">
+                <span style="color: var(--success); display: flex; align-items: center; gap: 0.25rem;"><i
+                        class='bx bx-wifi'></i> Online</span>
+                <span style="display: flex; align-items: center; gap: 0.25rem;">
+                    <i class='bx bx-user-circle' style="font-size: 1.2rem;"></i>
+                    Operador: <strong style="color: var(--text-main);" id="nomeOperadorDisplay">Nenhum</strong>
+                </span>
+            </div>
+        </div>
+
+        <header class="search-bar">
+            <div class="input-group">
+                <i class='bx bx-barcode-reader'></i>
+                <input type="text" id="productInput" placeholder="Ex: 5* ou Código de barras/Nome do produto..." autofocus
+                    autocomplete="off">
+            </div>
+            <button class="btn-primary" onclick="addMockProduct()">
+                <i class='bx bx-plus'></i> Adicionar
+            </button>
+        </header>
+
+        <section class="cart-container">
+            <table class="cart-table" id="cartTable">
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Qtd</th>
+                        <th>Unitário</th>
+                        <th>Total</th>
+                        <th style="width: 60px; text-align: center;">Ação</th>
+                    </tr>
+                </thead>
+                <tbody class="cart-body" id="cartBody"></tbody>
+            </table>
+
+            <div class="empty-state" id="emptyState">
+                <i class='bx bx-basket'></i>
+                <div>
+                    <h3 style="color: var(--text-main); margin-bottom: 0.5rem;">Carrinho Vazio</h3>
+                    <p>Bipe um produto ou digite o nome para começar.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <aside class="checkout-panel">
+        <h2 class="summary-title">Resumo da Venda</h2>
+
+        <div class="cliente-vinculado"
+            style="background: var(--bg-input); padding: 1rem; border-radius: 0.5rem; border: 1px solid var(--border-color); margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: center;">
+            <div>
+                <p style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.25rem;">Cliente na Nota</p>
+                <p id="nomeClienteVenda" style="font-size: 0.875rem; font-weight: 600; color: var(--text-main);">
+                    Consumidor Final</p>
+            </div>
+            <button onclick="openModal('modal-vincular-cliente')" title="Vincular Cliente"
+                style="background: rgba(59, 130, 246, 0.1); border: none; color: var(--primary); width: 32px; height: 32px; border-radius: 4px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; transition: 0.2s;">
+                <i class='bx bx-edit'></i>
+            </button>
+        </div>
+
+        <div id="caixaStatusIndicator" class="status-caixa fechado">
+            <i class='bx bx-lock' id="caixaIcon"></i>
+            <div>
+                <p id="caixaStatusText" class="status-title">Caixa Fechado</p>
+                <p id="caixaStatusSub" class="status-sub">Abra o caixa para vender.</p>
+            </div>
+        </div>
+
+        <div class="total-section">
+            <div class="action-buttons-container">
+                <button class="btn-action btn-outline" onclick="suspenderVenda()">
+                    <i class='bx bx-pause-circle'></i> Suspender
+                </button>
+                <button class="btn-action btn-danger-outline" onclick="cancelarVenda()">
+                    <i class='bx bx-x-circle'></i> Cancelar <span>(F8)</span>
+                </button>
+            </div>
+
+            <div class="details-values" style="margin-bottom: 1rem; border-bottom: 1px solid var(--border-color); padding-bottom: 1rem;">
+                <div style="display: flex; justify-content: space-between; color: var(--text-muted); margin-bottom: 0.5rem; font-size: 0.875rem;">
+                    <span>Subtotal</span> <span id="subtotalDisplay">R$ 0,00</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; color: var(--success); font-size: 0.875rem;">
+                    <span>Descontos (-)</span> <span id="descontosDisplay">R$ 0,00</span>
+                </div>
+            </div>
+
+            <div class="total-label" style="font-weight: 500;">Total a Pagar</div>
+            <div class="total-value" id="totalValue">R$ 0,00</div>
+        </div>
+
+        <button class="btn-checkout" onclick="initiateCheckout()">
+            Finalizar Venda <span
+                style="font-size: 0.875rem; font-weight: 600; opacity: 0.8; margin-left: 0.25rem;">(F10)</span>
+        </button>
+    </aside>
+
+    <div id="toastNotification" style="position: fixed; bottom: 20px; right: 20px; background: var(--success); color: white; padding: 1rem 1.5rem; border-radius: 0.5rem; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.3); display: none; align-items: center; gap: 0.75rem; z-index: 9999; animation: slideUp 0.3s ease-out;">
+        <i class='bx bx-check-circle' style="font-size: 1.5rem;"></i>
+        <span id="toastMessage" style="font-weight: 500;">Item adicionado!</span>
+    </div>
+
+    <div class="modal-overlay" id="modalOverlay" onclick="closeOnBackdrop(event)">
+        <div class="modal-box" id="modal-vincular-cliente">
+            <div class="modal-header">
+                <h2>Vincular Cliente</h2>
+                <button class="btn-close" onclick="closeAllModals()"><i class='bx bx-x'></i></button>
+            </div>
+            <p style="color: var(--text-muted); font-size: 0.875rem; margin-bottom: 1rem;">Digite o CPF ou Nome do cliente para vincular a esta venda.</p>
+            <div class="form-group" style="display: flex; gap: 0.5rem;">
+                <input type="text" id="inputCpfCliente" class="form-control" placeholder="000.000.000-00 ou Nome">
+                <button class="btn-primary" onclick="confirmarVincularCliente()">Buscar</button>
+            </div>
+            <button class="btn-danger" style="width: 100%; padding: 1rem; margin-top: 1rem; background: transparent; border: 1px solid var(--danger); color: var(--danger);" onclick="removerClienteNota()">
+                Remover Cliente (Consumidor Final)
+            </button>
+        </div>
+
+        <div class="modal-box" id="modal-desconto-item">
+            <div class="modal-header">
+                <h2>Desconto no Item</h2>
+                <button class="btn-close" onclick="closeAllModals()"><i class='bx bx-x'></i></button>
+            </div>
+            <p id="nomeProdutoDesconto" style="color: var(--text-muted); margin-bottom: 1rem; font-size: 0.875rem;"></p>
+            <input type="hidden" id="indexItemDesconto">
+            <div class="form-group" style="display: flex; gap: 0.5rem;">
+                <input type="number" id="valorDescontoItem" class="form-control" placeholder="Valor do desconto">
+                <select id="tipoDescontoItem" class="form-control" style="width: 100px;">
+                    <option value="fixed">R$</option>
+                    <option value="percent">%</option>
+                </select>
+            </div>
+            <button class="btn-primary" style="width: 100%; padding: 1rem; margin-top: 1rem;" onclick="confirmarDescontoItem()">
+                Aplicar Desconto
+            </button>
+        </div>
+
+        <div class="modal-box" id="modal-abrir-caixa">
+            <div class="modal-header">
+                <h2>Abrir Caixa</h2>
+                <button class="btn-close" onclick="closeAllModals()"><i class='bx bx-x'></i></button>
+            </div>
+            <div class="form-group">
+                <label>Operador (Nome ou Código)</label>
+                <input type="text" id="nomeOperadorInput" class="form-control" placeholder="Ex: João Silva ou 1042">
+            </div>
+            <div class="form-group">
+                <label>Fundo de Troco Inicial (R$)</label>
+                <input type="number" id="trocoInicial" class="form-control" placeholder="Ex: 100.00" value="0.00">
+            </div>
+            <button class="btn-success" style="width: 100%; padding: 1rem; margin-top: 1rem;" onclick="confirmarAberturaCaixa()">
+                Confirmar Abertura
+            </button>
+        </div>
+
+        <div class="modal-box" id="modal-fechar-caixa">
+            <p style="color: var(--text-muted); font-size: 0.875rem; margin-bottom: 0.5rem;">Resumo do Turno</p>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                <span>Operador Responsável:</span> <span id="resumoOperador" style="color: var(--text-main); font-weight: 500;">-</span>
+            </div>
+            <div class="modal-header" style="margin-top: 1rem;">
+                <h2>Fechamento de Caixa</h2>
+                <button class="btn-close" onclick="closeAllModals()"><i class='bx bx-x'></i></button>
+            </div>
+            <div style="background: var(--bg-input); padding: 1rem; border-radius: 0.5rem; margin-bottom: 1rem;">
+                <p style="color: var(--text-muted); font-size: 0.875rem; margin-bottom: 0.5rem;">Resumo de Valores</p>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                    <span>Fundo Inicial:</span> <span id="resumoFundo">R$ 0,00</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                    <span>Vendas (Dinheiro):</span> <span id="resumoDinheiro" style="color: var(--success)">+ R$ 0,00</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                    <span>Vendas (Cartão/PIX):</span> <span id="resumoOutros" style="color: var(--success)">+ R$ 0,00</span>
+                </div>
+                <hr style="border-color: var(--border-color); margin: 0.5rem 0;">
+                <div style="display: flex; justify-content: space-between; font-weight: bold; font-size: 1.1rem;">
+                    <span>Total Esperado em Gaveta:</span> <span id="resumoTotalEsperado" style="color: var(--primary)">R$ 0,00</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Valor Contado na Gaveta (R$)</label>
+                <input type="number" id="valorApurado" class="form-control" placeholder="0.00" oninput="calcularDiferenca()">
+            </div>
+            <div id="alertaDiferenca" style="margin-bottom: 1rem; font-size: 0.875rem; font-weight: bold;"></div>
+            <button class="btn-danger" style="width: 100%; padding: 1rem;" onclick="confirmarFechamentoCaixa()">
+                Encerrar Turno e Fechar Caixa
+            </button>
+        </div>
+
+        <div class="modal-box" id="modal-pagamento">
+            <div class="modal-header">
+                <h2>Finalizar Pagamento</h2>
+                <button class="btn-close" onclick="closeAllModals()"><i class='bx bx-x'></i></button>
+            </div>
+            <div class="modal-total" id="modalTotalValue">R$ 0,00</div>
+            <div style="background: var(--bg-input); padding: 1rem; border-radius: 0.5rem; margin-bottom: 1.5rem; border: 1px solid var(--border-color);">
+                <label style="color: var(--text-muted); font-size: 0.8rem; margin-bottom: 0.5rem; display: block;">Aplicar Desconto Geral</label>
+                <div style="display: flex; gap: 0.5rem;">
+                    <input type="number" id="discountInput" class="form-control" placeholder="0.00" oninput="applyDiscount()">
+                    <select id="discountType" class="form-control" style="width: 100px;" onchange="applyDiscount()">
+                        <option value="fixed">R$</option>
+                        <option value="percent">%</option>
+                    </select>
+                </div>
+            </div>
+            <div class="payment-grid">
+                <div class="payment-method selected" onclick="selectPayment(this)"><i class='bx bx-money'></i> Dinheiro</div>
+                <div class="payment-method" onclick="selectPayment(this)"><i class='bx bx-credit-card'></i> Crédito</div>
+                <div class="payment-method" onclick="selectPayment(this)"><i class='bx bx-credit-card-front'></i> Débito</div>
+                <div class="payment-method" onclick="selectPayment(this)"><i class='bx bx-qr-scan'></i> PIX</div>
+            </div>
+            <button class="btn-checkout" style="width: 100%;" onclick="confirmPayment()">Confirmar Pagamento</button>
+        </div>
+
+        <div class="modal-box" id="modal-historico" style="max-width: 600px;">
+            <div class="modal-header"><h2>Histórico de Vendas</h2><button class="btn-close" onclick="closeAllModals()"><i class='bx bx-x'></i></button></div>
+            <p style="color: var(--text-muted); margin-bottom: 1rem; font-size: 0.875rem;">Últimas vendas realizadas hoje:</p>
+            <div style="background: var(--bg-input); border-radius: 0.5rem; overflow: hidden; border: 1px solid var(--border-color);">
+                <table class="modal-table">
+                    <tr><th>Hora</th><th>Vendedor</th><th>Total</th><th>Status</th></tr>
+                    <tr><td>14:32</td><td>Admin</td><td>R$ 154,90</td><td style="color:var(--success)">Concluída</td></tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="modal-box" id="modal-produtos">
+            <div class="modal-header"><h2>Cadastrar Produto</h2><button class="btn-close" onclick="closeAllModals()"><i class='bx bx-x'></i></button></div>
+            <div class="form-group"><label>Nome do Produto</label><input type="text" class="form-control"></div>
+            <button class="btn-primary" style="width: 100%; padding: 1rem; margin-top: 1rem;" onclick="mockSave('Produto')">Salvar</button>
+        </div>
+
+        <div class="modal-box" id="modal-clientes">
+            <div class="modal-header"><h2>Cadastrar Cliente</h2><button class="btn-close" onclick="closeAllModals()"><i class='bx bx-x'></i></button></div>
+            <div class="form-group"><label>Nome Completo</label><input type="text" class="form-control"></div>
+            <button class="btn-primary" style="width: 100%; padding: 1rem; margin-top: 1rem;" onclick="mockSave('Cliente')">Salvar</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,637 @@
+/* ================= Configurações Básicas ================= */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #121212;
+    color: #e0e0e0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding: 40px 0;
+}
+
+.dashboard-container {
+    width: 1100px;
+    max-width: 95%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* ================= Cabeçalho e Pesquisa ================= */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding-bottom: 10px;
+}
+
+.title-group h1 {
+    font-size: 26px;
+    font-weight: 700;
+    margin: 0;
+    color: #ffffff;
+}
+
+.title-group p {
+    font-size: 14px;
+    color: #aaaaaa;
+    margin: 5px 0 0 0;
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    background-color: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 6px;
+    padding: 10px 15px;
+    transition: border-color 0.2s;
+    width: 300px;
+}
+
+.search-bar:focus-within {
+    border-color: #fbc02d;
+    /* Destaque amarelo */
+}
+
+.search-icon {
+    font-size: 14px;
+    color: #888888;
+    margin-right: 10px;
+}
+
+.search-input {
+    background: transparent;
+    border: none;
+    color: #ffffff;
+    font-size: 14px;
+    outline: none;
+    width: 100%;
+    font-family: inherit;
+}
+
+/* ================= Cartões e Métricas ================= */
+.card {
+    background-color: #1a1a1a;
+    border-radius: 12px;
+    border: 1px solid #333;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.metric-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.metric-card {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.icon {
+    font-size: 26px;
+}
+
+.metric-info h3 {
+    font-size: 12px;
+    color: #aaaaaa;
+    margin: 0;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.metric-info .value {
+    font-size: 26px;
+    font-weight: 700;
+    margin: 5px 0 0 0;
+    color: #ffffff;
+}
+
+.metric-info .unit {
+    font-size: 14px;
+    color: #888888;
+    font-weight: 400;
+}
+
+/* Destaque para o cartão de alerta */
+.alert-card {
+    border-color: #5c4b18;
+    background-color: #1c180d;
+}
+
+.alert-text {
+    color: #fbc02d !important;
+}
+
+/* ================= Botões e Barra de Ação ================= */
+.action-bar {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    margin: 10px 0;
+}
+
+.btn {
+    border-radius: 6px;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s;
+    font-family: inherit;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-primary {
+    background-color: #fbc02d;
+    /* Amarelo principal */
+    color: #121212;
+}
+
+.btn-primary:hover {
+    background-color: #f9a825;
+}
+
+.btn-secondary {
+    background-color: #333333;
+    color: #ffffff;
+}
+
+.btn-secondary:hover {
+    background-color: #444444;
+}
+
+.btn-outline {
+    background-color: transparent;
+    color: #e0e0e0;
+    border: 1px solid #444;
+}
+
+.btn-outline:hover {
+    background-color: #2a2a2a;
+    border-color: #666;
+}
+
+.btn-sm {
+    padding: 6px 12px;
+    font-size: 13px;
+}
+
+.btn-icon {
+    background: none;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 5px;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+}
+
+.btn-icon:hover {
+    opacity: 1;
+}
+
+/* ================= Tabela ================= */
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.card-header h3 {
+    margin: 0;
+    color: #ffffff;
+    font-size: 18px;
+}
+
+.filter-select {
+    background-color: #121212;
+    color: #e0e0e0;
+    border: 1px solid #333;
+    border-radius: 4px;
+    padding: 6px 10px;
+    outline: none;
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+.data-table th,
+.data-table td {
+    text-align: left;
+    padding: 14px 15px;
+    border-bottom: 1px solid #2a2a2a;
+}
+
+.data-table th {
+    font-weight: 600;
+    color: #888888;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 0.05em;
+    padding-top: 0;
+}
+
+.text-right {
+    text-align: right !important;
+}
+
+.text-muted {
+    color: #888888;
+}
+
+.product-name {
+    color: #ffffff;
+    font-weight: 500;
+}
+
+.stock-value {
+    font-weight: 700;
+    color: #e0e0e0;
+}
+
+.warning-text {
+    color: #fbc02d;
+}
+
+.danger-text {
+    color: #e53935;
+}
+
+/* Badges de Status */
+.status {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.status-ok {
+    background-color: #1b5e20;
+    color: #a5d6a7;
+}
+
+.status-warning {
+    background-color: #f57f17;
+    color: #fffde7;
+}
+
+.status-danger {
+    background-color: #b71c1c;
+    color: #ffcdd2;
+}
+
+/* Paginação */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-top: 25px;
+}
+
+.page-num {
+    font-size: 13px;
+    color: #aaaaaa;
+}
+
+/* ================= Modais (Janelas Sobrepostas) ================= */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.75);
+    display: none;
+    /* Oculto por padrão. O JS muda para 'flex' */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    backdrop-filter: blur(3px);
+    /* Efeito de desfoque no fundo */
+}
+
+.modal-content {
+    background-color: #1a1a1a;
+    width: 500px;
+    max-width: 90%;
+    border-radius: 12px;
+    border: 1px solid #333;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-header {
+    padding: 20px 25px;
+    border-bottom: 1px solid #2a2a2a;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header h2 {
+    margin: 0;
+    font-size: 18px;
+    color: #ffffff;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    color: #888888;
+    font-size: 18px;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.close-btn:hover {
+    color: #ffffff;
+}
+
+.modal-body {
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.product-highlight {
+    background-color: #2a2a2a;
+    padding: 12px 15px;
+    border-radius: 6px;
+    font-size: 14px;
+    color: #e0e0e0;
+    border-left: 4px solid #fbc02d;
+    line-height: 1.5;
+}
+
+.modal-footer {
+    padding: 20px 25px;
+    border-top: 1px solid #2a2a2a;
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+}
+
+/* Formulários dentro do Modal */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.form-row {
+    display: flex;
+    gap: 15px;
+}
+
+.form-row .half {
+    flex: 1;
+}
+
+.form-group label {
+    font-size: 13px;
+    color: #aaaaaa;
+    font-weight: 500;
+}
+
+.form-control {
+    background-color: #121212;
+    border: 1px solid #333;
+    color: #ffffff;
+    border-radius: 6px;
+    padding: 10px 12px;
+    font-size: 14px;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.form-control:focus {
+    border-color: #fbc02d;
+}
+
+.form-text {
+    font-size: 12px;
+    color: #666;
+    margin-top: 4px;
+}
+
+/* adição da classe filtros */
+
+/* ================= Filtros Rápidos (Chips) ================= */
+.quick-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px dashed #333;
+    /* Linha sutil separando os filtros da tabela */
+}
+
+.chip {
+    background-color: #121212;
+    border: 1px solid #333;
+    color: #aaaaaa;
+    padding: 6px 14px;
+    border-radius: 20px;
+    /* Formato de pílula */
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: inherit;
+}
+
+.chip:hover {
+    border-color: #666;
+    color: #ffffff;
+}
+
+/* Estilos específicos para quando o filtro está ativado ou focado num status */
+.chip-active {
+    background-color: #333333;
+    color: #ffffff;
+    border-color: #555;
+}
+
+.chip-warning:hover {
+    border-color: #f57f17;
+    color: #fbc02d;
+    background-color: rgba(245, 127, 23, 0.1);
+}
+
+.chip-danger:hover {
+    border-color: #b71c1c;
+    color: #e53935;
+    background-color: rgba(183, 28, 28, 0.1);
+}
+
+.chip-promo:hover {
+    border-color: #9c27b0;
+    /* Roxo para promoções */
+    color: #ce93d8;
+    background-color: rgba(156, 39, 176, 0.1);
+}
+
+.chip-stagnant:hover {
+    border-color: #607d8b;
+    /* Azul/Cinza para itens parados */
+    color: #b0bec5;
+    background-color: rgba(96, 125, 139, 0.1);
+}
+
+
+/* Thumb do produto */
+.product-thumb {
+    width: 32px;
+    height: 32px;
+    background: #333;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Botões de Ação na Tabela */
+.btn-icon.delete:hover {
+    color: #e53935;
+}
+
+.btn-icon.edit:hover {
+    color: #4caf50;
+}
+
+/* Botão de Excluir Perigoso */
+.btn-danger {
+    background-color: #e53935;
+    color: white;
+}
+
+.btn-danger:hover {
+    background-color: #c62828;
+}
+
+.btn-danger-outline {
+    border: 1px solid #e53935;
+    color: #e53935;
+    background: transparent;
+}
+
+/* Barra de Ação Múltipla */
+.bulk-actions {
+    background: #252525;
+    padding: 10px 20px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    border: 1px solid #444;
+}
+
+/* Modal menor para confirmação */
+.modal-sm {
+    width: 400px !important;
+}
+
+/* Importar nota de entrada. */
+
+/* Estrutura do Dropdown */
+.dropdown { position: relative; display: inline-block; }
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 110%; left: 0;
+    background-color: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 8px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.5);
+    width: 200px;
+    z-index: 100;
+}
+
+.dropdown-menu button {
+    display: block;
+    width: 100%;
+    padding: 12px 15px;
+    background: none;
+    border: none;
+    color: #e0e0e0;
+    text-align: left;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.dropdown-menu button:hover { background-color: #252525; color: #fbc02d; }
+
+.import-action { border-top: 1px solid #333 !important; font-weight: 600; color: #fbc02d !important; }
+
+
+/* Padronização da Barra de Ações */
+.action-bar {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    margin: 20px 0;
+}
+
+/* Base de todos os botões */
+.btn {
+    padding: 12px 20px;
+    border-radius: 8px; /* Arredondamento consistente */
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    border: 1px solid transparent; /* Todos precisam de borda para alinhar */
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: inherit;
+    height: 44px; /* Altura fixa para todos */
+}
+
+/* Ajustes específicos de cada estilo mantendo a base */
+.btn-primary { background-color: #fbc02d; color: #121212; }
+.btn-primary:hover { background-color: #f9a825; }
+
+.btn-secondary { background-color: #333333; color: #ffffff; border-color: #444; }
+.btn-secondary:hover { background-color: #444444; }
+
+.btn-outline { background-color: transparent; color: #e0e0e0; border-color: #444; }
+.btn-outline:hover { background-color: #2a2a2a; border-color: #666; }
+
+.btn-outline-dashed { 
+    background-color: transparent; 
+    border: 1px dashed #fbc02d; 
+    color: #fbc02d; 
+}
+.btn-outline-dashed:hover { background-color: rgba(251, 192, 45, 0.1); }
+
+/* Efeito de destaque para o card novo */
+.metric-cards {
+    grid-template-columns: repeat(4, 1fr); /* Atualize para 4 colunas */
+}
+
+/* Opcional: ajustar a cor do card se quiser um toque especial */
+.metric-card[style*="border-color: #4a148c"] {
+    background: linear-gradient(145deg, #1a1a1a, #25123d);
+}

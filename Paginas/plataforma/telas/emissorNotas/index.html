@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emissão de NFe - Faturamento</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-title">
+                <div class="title-with-badge">
+                    <h1>Emissão de NFe</h1>
+                    <span class="badge warning" id="status-nfe">Aguardando Pedido</span>
+                </div>
+                <p id="header-subtitle">Selecione um pedido de venda para faturar.</p>
+            </div>
+            <div class="actions">
+                <button type="button" class="btn-salvar hidden-section" id="btn-emitir">Emitir Nota Fiscal</button>
+            </div>
+        </header>
+
+        <div class="form-card" id="bloco-busca" style="margin-bottom: 2rem;">
+            <h3 class="section-title">Buscar Pedido de Venda</h3>
+            <div class="search-wrapper">
+                <input type="text" id="input-busca" placeholder="Digite o número do pedido (Ex: 8492 ou 1050)...">
+                <button type="button" class="btn-salvar" id="btn-buscar">Carregar Pedido</button>
+            </div>
+            <span id="msg-busca" class="error-msg" style="display: none; margin-top: 0.5rem;">Pedido não encontrado.</span>
+        </div>
+
+        <form id="form-emissao" class="form-card hidden-section">
+            
+            <div class="alert-box" id="aviso-fiscal">
+                <strong>Dica:</strong> Revise as quantidades e clique na engrenagem (⚙️) para ajustar a tributação de cada item.
+            </div>
+
+            <h3 class="section-title">Destinatário (Cliente)</h3>
+            <div class="form-grid">
+                <div class="form-group span-2">
+                    <label>Razão Social</label>
+                    <input type="text" id="cli_razao" disabled>
+                </div>
+                <div class="form-group">
+                    <label>CNPJ / CPF</label>
+                    <input type="text" id="cli_cnpj" disabled>
+                </div>
+                <div class="form-group">
+                    <label>Inscrição Estadual</label>
+                    <input type="text" id="cli_ie" disabled>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="table-header">
+                <h3 class="section-title" style="margin: 0;">Produtos e Tributação</h3>
+            </div>
+            
+            <div class="table-responsive">
+                <table class="xml-table" id="tabela-itens-venda">
+                    <thead>
+                        <tr>
+                            <th>Produto</th>
+                            <th>Unid.</th>
+                            <th>Qtd</th>
+                            <th>V. Unit (R$)</th>
+                            <th>V. Total (R$)</th>
+                            <th style="text-align: center;">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        </tbody>
+                </table>
+            </div>
+
+            <div class="divider"></div>
+            <div class="table-header">
+                <h3 class="section-title" style="margin: 0;">Dados Adicionais</h3>
+            </div>
+            <div class="form-group span-2" style="margin-bottom: 2rem;">
+                <label for="info_complementar">Informações Complementares de Interesse do Contribuinte</label>
+                <textarea id="info_complementar" rows="3" placeholder="Ex: Documento emitido por ME ou EPP optante pelo Simples Nacional. Valores para depósito: Banco Itaú, Ag: 0000..."></textarea>
+            </div>
+
+            <div class="summary-box summary-totais">
+                <div class="totais-item">
+                    <span>Desconto (R$):</span>
+                    <input type="number" id="valor_desconto" value="0.00" step="0.01" class="input-pequeno">
+                </div>
+                <div class="totais-item">
+                    <span>Frete (R$):</span>
+                    <input type="number" id="valor_frete" value="0.00" step="0.01" class="input-pequeno">
+                </div>
+                <div class="totais-item highlight-profit">
+                    <span>Total da NFe:</span>
+                    <strong id="total_nfe">R$ 0,00</strong>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div id="modal-tributacao" class="modal hidden-section">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3 class="section-title" style="margin: 0;" id="modal-titulo-produto">Ajustar Tributação</h3>
+                <p class="text-muted" style="font-size: 0.85rem; margin-top: 0.25rem;">Preencha os dados exigidos pela Sefaz para este item.</p>
+            </div>
+            
+            <div class="modal-body form-grid">
+                <div class="form-group">
+                    <label for="modal_ncm">NCM (8 dígitos)</label>
+                    <input type="text" id="modal_ncm" maxlength="8">
+                </div>
+                <div class="form-group">
+                    <label for="modal_cest">CEST (Opcional)</label>
+                    <input type="text" id="modal_cest" maxlength="7" placeholder="Apenas se tiver ST">
+                </div>
+                <div class="form-group">
+                    <label for="modal_cfop">CFOP do Item</label>
+                    <input type="text" id="modal_cfop" maxlength="4">
+                </div>
+                <div class="form-group">
+                    <label for="modal_origem">Origem da Mercadoria</label>
+                    <select id="modal_origem">
+                        <option value="0">0 - Nacional</option>
+                        <option value="1">1 - Estrangeira (Importação direta)</option>
+                        <option value="2">2 - Estrangeira (Adquirida mercado interno)</option>
+                    </select>
+                </div>
+
+                <div class="form-group span-2 divider-interna"></div>
+
+                <div class="form-group">
+                    <label for="modal_csosn">CST / CSOSN (ICMS)</label>
+                    <select id="modal_csosn">
+                        <option value="101">101 - Tributada pelo Simples c/ permissão de crédito</option>
+                        <option value="102">102 - Tributada pelo Simples s/ permissão de crédito</option>
+                        <option value="500">500 - ICMS cobrado anteriormente por ST</option>
+                        <option value="00">00 - Tributada Integralmente (Lucro Real/Presumido)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="modal_aliq_icms">Alíquota ICMS (%)</label>
+                    <input type="number" id="modal_aliq_icms" step="0.01">
+                </div>
+                <div class="form-group">
+                    <label for="modal_pis_cofins">CST PIS e COFINS</label>
+                    <select id="modal_pis_cofins">
+                        <option value="01">01 - Operação Tributável com Alíquota Básica</option>
+                        <option value="04">04 - Operação Tributável Monofásica</option>
+                        <option value="07">07 - Operação Isenta</option>
+                        <option value="49">49 - Outras Operações de Saída</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="modal-footer actions" style="margin-top: 2rem;">
+                <button type="button" class="btn-cancelar" id="btn-fechar-modal">Cancelar</button>
+                <button type="button" class="btn-salvar" id="btn-salvar-modal">Confirmar Dados</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>

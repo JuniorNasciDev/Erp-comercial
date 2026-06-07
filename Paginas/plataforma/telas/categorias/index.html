@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestão de Categorias</title>
+    <link rel="stylesheet" href="../estoque/style.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="dashboard-container">
+    <header class="header">
+        <h1>📂 Gestão de Categorias</h1>
+        <button class="btn btn-primary" onclick="abrirModal('modal-nova-categoria')">+ Nova Categoria</button>
+    </header>
+
+    <main class="card history-card">
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>Cor</th>
+                <th>Nome</th>
+                <th>Descrição</th> <th>Produtos</th>
+                <th>Margem</th>
+                <th class="text-right">Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><div class="color-tag" style="background-color: #4caf50;"></div></td>
+                <td class="product-name">Bebidas</td>
+                <td class="text-muted" style="font-size: 13px;">Refrigerantes, sucos e alcoólicos.</td>
+                <td>145 itens</td>
+                <td>30%</td>
+                <td class="text-right">
+                    <button class="btn-icon" onclick="abrirModal('modal-editar-categoria')">✏️</button>
+                    <button class="btn-icon" onclick="tentarExcluirCategoria('Bebidas', 145)">🗑️</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</main>
+</div>
+
+<div id="modal-nova-categoria" class="modal-overlay">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>📂 Nova Categoria</h2>
+            <button class="close-btn" onclick="fecharModal('modal-nova-categoria')">✖</button>
+        </div>
+        
+        <div class="modal-body">
+            <div class="form-row">
+                <div class="form-group" style="flex: 3;">
+                    <label>Nome da Categoria</label>
+                    <input type="text" id="nova-nome" class="form-control" placeholder="Ex: Bebidas">
+                </div>
+                <div class="form-group" style="flex: 1;">
+                    <label>Cor</label>
+                    <input type="color" id="nova-cor" class="form-control" style="height: 44px; padding: 2px;">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Margem de Lucro Sugerida (%)</label>
+                <input type="number" id="nova-margem" class="form-control" placeholder="30">
+            </div>
+
+            <div class="form-group">
+                <label>Descrição</label>
+                <textarea id="nova-desc" class="form-control" rows="2" placeholder="Opcional: Ex: Bebidas geladas e alcoólicas"></textarea>
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <button class="btn btn-outline" onclick="fecharModal('modal-nova-categoria')">Cancelar</button>
+            <button class="btn btn-primary" onclick="salvarNovaCategoria()">Salvar Categoria</button>
+        </div>
+    </div>
+</div>
+
+<div id="modal-editar-categoria" class="modal-overlay">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>✏️ Editar Categoria</h2>
+            <button class="close-btn" onclick="fecharModal('modal-editar-categoria')">✖</button>
+        </div>
+        
+        <div class="modal-body">
+            <input type="hidden" id="edit-id-categoria">
+
+            <div class="form-row">
+                <div class="form-group" style="flex: 3;">
+                    <label>Nome da Categoria</label>
+                    <input type="text" id="edit-nome-categoria" class="form-control" placeholder="Ex: Bebidas">
+                </div>
+                <div class="form-group" style="flex: 1;">
+                    <label>Cor</label>
+                    <input type="color" id="edit-cor-categoria" class="form-control" style="height: 44px; padding: 2px;">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Margem de Lucro Sugerida (%)</label>
+                <input type="number" id="edit-margem-categoria" class="form-control" placeholder="30">
+            </div>
+
+            <div class="form-group">
+                <label>Descrição</label>
+                <textarea id="edit-desc-categoria" class="form-control" rows="2" placeholder="Opcional..."></textarea>
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <button class="btn btn-outline" onclick="fecharModal('modal-editar-categoria')">Cancelar</button>
+            <button class="btn btn-primary" onclick="salvarEdicao()">Salvar Alterações</button>
+        </div>
+    </div>
+</div>
+
+<div id="modal-excluir-categoria" class="modal-overlay">
+    <div class="modal-content modal-sm">
+        <div class="modal-header"><h2 style="color: #e53935;">⚠️ Excluir?</h2></div>
+        <div class="modal-body"><p>Tem certeza que deseja excluir esta categoria?</p></div>
+        <div class="modal-footer">
+            <button class="btn btn-outline" onclick="fecharModal('modal-excluir-categoria')">Cancelar</button>
+            <button class="btn btn-danger">Sim, Excluir</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Funções essenciais para o funcionamento dos modais
+    function abrirModal(id) { document.getElementById(id).style.display = 'flex'; }
+    function fecharModal(id) { document.getElementById(id).style.display = 'none'; }
+    
+    function tentarExcluirCategoria(nome, qtd) {
+        if (qtd > 0) {
+            alert("Ação Bloqueada: A categoria '" + nome + "' possui produtos.");
+        } else {
+            abrirModal('modal-excluir-categoria');
+        }
+    }
+</script>
+
+</body>
+</html>

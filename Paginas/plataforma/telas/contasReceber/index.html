@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contas a Receber</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-title">
+                <h1>Contas a Receber</h1>
+                <p>Gestão de entradas, clientes e previsão de caixa</p>
+            </div>
+        </header>
+
+        <div class="summary-totais" style="margin-bottom: 2rem;">
+            <div class="totais-item align-left">
+                <span>A Receber (Pendente)</span>
+                <strong id="total-pendente" style="color: var(--warning);">R$ 0,00</strong>
+            </div>
+            <div class="totais-item align-left">
+                <span>Já Recebido</span>
+                <strong id="total-recebido" style="color: var(--success);">R$ 0,00</strong>
+            </div>
+            <div class="totais-item highlight-profit">
+                <span>Previsão Total</span>
+                <strong id="total-geral" style="color: var(--primary);">R$ 0,00</strong>
+            </div>
+        </div>
+
+        <div class="form-card" style="margin-bottom: 2rem;">
+            <h2 class="section-title">Registrar Novo Recebimento</h2>
+            <form id="form-receber">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="cliente">Cliente / Descrição</label>
+                        <input type="text" id="cliente" placeholder="Ex: João da Silva, Venda #102..." required>
+                    </div>
+                    <div class="form-group">
+                        <label for="valor">Valor (R$)</label>
+                        <input type="number" id="valor" step="0.01" min="0.01" placeholder="0.00" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="vencimento">Data Prevista / Vencimento</label>
+                        <input type="date" id="vencimento" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="meio-pagamento">Meio de Pagamento</label>
+                        <select id="meio-pagamento" required>
+                            <option value="Pix">Pix</option>
+                            <option value="Boleto">Boleto Bancário</option>
+                            <option value="Cartão de Crédito">Cartão de Crédito</option>
+                            <option value="Transferência">Transferência (TED/DOC)</option>
+                            <option value="Dinheiro">Dinheiro</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="divider"></div>
+                
+                <div class="form-actions">
+                    <button type="reset" class="btn-cancelar">Limpar</button>
+                    <button type="submit" class="btn-salvar">Adicionar Recebimento</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="form-card">
+            <h2 class="section-title">Lista de Recebimentos</h2>
+            <div class="table-container">
+                <table id="tabela-receber">
+                    <thead>
+                        <tr>
+                            <th>Cliente / Descrição</th>
+                            <th>Valor</th>
+                            <th>Vencimento</th>
+                            <th>Forma de Pgto.</th>
+                            <th>Status</th>
+                            <th style="text-align: right;">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="lista-receber">
+                        </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

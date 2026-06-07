@@ -1,0 +1,50 @@
+.field--float {
+  position: relative;
+}
+
+.field--float label {
+  position: absolute;
+  inset-inline-end: 14px;
+  inset-inline-start: auto;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1rem;
+  pointer-events: none;
+  max-width: calc(100% - 28px);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: end;
+  transition: transform 0.26s cubic-bezier(0.22, 1, 0.36, 1), font-size 0.26s ease, color 0.22s ease, top 0.26s ease,
+    inset-inline-start 0.26s ease, inset-inline-end 0.26s ease, max-width 0.26s ease;
+}
+
+[dir="rtl"] .field--float label {
+  transform-origin: top right;
+}
+
+[dir="ltr"] .field--float label {
+  inset-inline-end: auto;
+  inset-inline-start: 14px;
+  text-align: start;
+  transform-origin: top left;
+}
+
+.field--float input:focus + label,
+.field--float input:not(:placeholder-shown) + label {
+  top: 10px;
+  max-width: calc(100% - 24px);
+  white-space: normal;
+  transform: translateY(0) scale(0.78);
+}
+
+[dir="ltr"] .field--float input:focus + label,
+[dir="ltr"] .field--float input:not(:placeholder-shown) + label {
+  top: 10px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .field--float label {
+    transition: none;
+  }
+}

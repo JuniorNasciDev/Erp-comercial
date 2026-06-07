@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controle de Estoque</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="dashboard-container">
+
+        <header class="header">
+            <div class="title-group">
+                <h1>📦 Controle de Estoque</h1>
+                <p>Gerencie seus produtos, entradas e saídas.</p>
+            </div>
+            <div class="search-bar">
+                <span class="search-icon">🔍</span>
+                <input type="text" class="search-input" placeholder="Buscar Produto ou Cód...">
+            </div>
+        </header>
+
+        <div class="metric-cards">
+            <div class="card metric-card" onclick="abrirModal('modal-curva-abc')"
+                style="cursor:pointer; border-color: #4a148c;">
+                <div class="icon">📈</div>
+                <div class="metric-info">
+                    <h3>VISÃO ESTRATÉGICA</h3>
+                    <p class="value" style="font-size: 16px;">Top: Coca-Cola, Pão</p>
+                </div>
+            </div>
+            <div class="card metric-card">
+                <div class="icon box-icon">📦</div>
+                <div class="metric-info">
+                    <h3>ITENS TOTAIS</h3>
+                    <p class="value">1.452 <span class="unit">un</span></p>
+                </div>
+            </div>
+            <div class="card metric-card">
+                <div class="icon money-icon">💰</div>
+                <div class="metric-info">
+                    <h3>VALOR EM ESTOQUE</h3>
+                    <p class="value">R$ 32.450,00</p>
+                </div>
+            </div>
+            <div class="card metric-card alert-card">
+                <div class="icon alert-icon">⚠️</div>
+                <div class="metric-info">
+                    <h3>ALERTAS DE ESTOQUE</h3>
+                    <p class="value alert-text">3 <span class="unit">itens na reserva</span></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sua Action Bar agora fica limpa e alinhada -->
+        <div class="action-bar">
+            <button class="btn btn-primary" onclick="abrirModal('modal-entrada')">📥 Dar Entrada</button>
+            <button class="btn btn-secondary" onclick="abrirModal('modal-ajuste')">⚖️ Ajuste / Baixa</button>
+
+            <!-- Botões de Importação (agora organizados) -->
+            <button class="btn btn-outline-dashed" onclick="document.getElementById('xml-file').click()">
+                📄 importar XML NF-e
+            </button>
+            <button class="btn btn-outline-dashed" onclick="document.getElementById('planilha-file').click()">
+                📊 importar Planilha modelo
+            </button>
+
+            <!-- Botão de Novo Produto à direita -->
+            <button class="btn btn-outline" style="margin-left: auto;" onclick="abrirModal('modal-novo-produto')">
+                + Novo Produto
+            </button>
+
+            <!-- Inputs ocultos para os arquivos -->
+            <input type="file" id="xml-file" style="display:none" accept=".xml">
+            <input type="file" id="planilha-file" style="display:none" accept=".xlsx, .csv">
+        </div>
+        <!-- Tabela de Registro Detalhado -->
+        <main class="card history-card">
+            <div class="card-header">
+                <h3>Registro Detalhado</h3>
+
+                <!-- Filtro de Categorias Original -->
+                <select class="filter-select">
+                    <option value="all">Todas as Categorias</option>
+                    <option value="bebidas">Bebidas</option>
+                    <option value="limpeza">Limpeza</option>
+                    <option value="padaria">Padaria</option>
+                </select>
+            </div>
+
+            <!-- NOVA SEÇÃO: Filtros Rápidos (Chips) -->
+            <div class="quick-filters">
+                <button class="chip chip-active">Todos os Itens</button>
+                <button class="chip chip-warning">⚠️ Estoque Baixo (3)</button>
+                <button class="chip chip-danger">🔴 Zerados (1)</button>
+                <button class="chip chip-promo">🏷️ Em Promoção</button>
+                <button class="chip chip-stagnant">⏳ Parados (+30 dias)</button>
+            </div>
+
+            <!-- Adicione um botão de ação múltipla que aparece quando itens são selecionados -->
+            <div id="bulk-actions" class="bulk-actions" style="display: none;">
+                <span>1 item selecionado</span>
+                <button class="btn btn-danger-outline" onclick="abrirModal('modal-excluir')">Excluir
+                    Selecionados</button>
+            </div>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th><input type="checkbox" id="select-all" onclick="toggleSelectAll(this)"></th>
+                        <th>Status</th>
+                        <th>Produto</th>
+                        <th>Estoque</th>
+                        <th class="text-right">Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><input type="checkbox" class="row-checkbox" onclick="checkSelection()"></td>
+                        <td><span class="status status-ok">OK</span></td>
+                        <td class="product-name">
+                            <div style="display:flex; align-items:center; gap:10px;">
+                                <div class="product-thumb">🥤</div>
+                                <span>Coca-Cola 2L</span>
+                            </div>
+                        </td>
+                        <td class="stock-value">145 un</td>
+                        <td class="text-right">
+                            <button class="btn-icon edit" title="Editar"
+                                onclick="abrirModal('modal-editar-produto')">✏️</button>
+                            <button class="btn-icon delete" title="Remover"
+                                onclick="abrirModal('modal-excluir')">🗑️</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+    </div>
+
+    <div id="modal-entrada" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>📥 Nova Entrada de Produtos</h2>
+                <button class="close-btn" onclick="fecharModal('modal-entrada')">✖</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Buscar Produto (Cód ou Nome)</label>
+                    <input type="text" class="form-control" placeholder="Ex: #005 ou Detergente..."
+                        value="Detergente Neutro">
+                    <small class="form-text text-muted">Estoque atual: 02 unidades</small>
+                </div>
+                <div class="form-row">
+                    <div class="form-group half">
+                        <label>Qtd. Recebida</label>
+                        <input type="number" class="form-control" placeholder="0">
+                    </div>
+                    <div class="form-group half">
+                        <label>Custo Unit. (R$)</label>
+                        <input type="text" class="form-control" placeholder="0,00" value="3,50">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Fornecedor (Opcional)</label>
+                    <select class="form-control">
+                        <option>Atacadão Distribuidora</option>
+                        <option>Distribuidora Silva</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" onclick="fecharModal('modal-entrada')">Cancelar</button>
+                <button class="btn btn-primary" onclick="fecharModal('modal-entrada')">Confirmar Entrada</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-ajuste" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>⚖️ Ajuste de Estoque</h2>
+                <button class="close-btn" onclick="fecharModal('modal-ajuste')">✖</button>
+            </div>
+            <div class="modal-body">
+                <div class="product-highlight">
+                    <strong>Produto:</strong> Detergente Neutro (Cód #005)<br>
+                    <strong>Estoque no Sistema:</strong> 02 unidades
+                </div>
+
+                <div class="form-group">
+                    <label>Novo Saldo Físico (Real na prateleira)</label>
+                    <input type="number" class="form-control" placeholder="Ex: 5">
+                </div>
+                <div class="form-group">
+                    <label>Motivo do Ajuste</label>
+                    <select class="form-control">
+                        <option>Contagem de rotina (Inventário)</option>
+                        <option>Avaria / Quebra / Vencimento</option>
+                        <option>Uso interno</option>
+                        <option>Perda / Roubo</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Observação (Opcional)</label>
+                    <textarea class="form-control" rows="2"
+                        placeholder="Ex: Produto encontrado no depósito..."></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" onclick="fecharModal('modal-ajuste')">Cancelar</button>
+                <button class="btn btn-primary" onclick="fecharModal('modal-ajuste')">Salvar Ajuste</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-excluir" class="modal-overlay">
+        <div class="modal-content modal-sm">
+            <div class="modal-header">
+                <h2>⚠️ Confirmar Exclusão</h2>
+            </div>
+            <div class="modal-body">
+                <p>Você tem certeza que deseja remover este(s) produto(s)? Esta ação não pode ser desfeita.</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" onclick="fecharModal('modal-excluir')">Cancelar</button>
+                <button class="btn btn-danger" onclick="fecharModal('modal-excluir')">Sim, Excluir</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Adicionar Novo Produto -->
+    <div id="modal-novo-produto" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>➕ Cadastrar Novo Produto</h2>
+                <button class="close-btn" onclick="fecharModal('modal-novo-produto')">✖</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Nome do Produto</label>
+                    <input type="text" class="form-control" placeholder="Ex: Coca-Cola 2L">
+                </div>
+                <div class="form-row">
+                    <div class="form-group half">
+                        <label>Código Interno / SKU</label>
+                        <input type="text" class="form-control" placeholder="Ex: #001">
+                    </div>
+                    <div class="form-group half">
+                        <label>Categoria</label>
+                        <select class="form-control">
+                            <option>Bebidas</option>
+                            <option>Limpeza</option>
+                            <option>Padaria</option>
+                            <option>Outros</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group half">
+                        <label>Preço de Venda (R$)</label>
+                        <input type="text" class="form-control" placeholder="0,00">
+                    </div>
+                    <div class="form-group half">
+                        <label>Estoque Mínimo (Alerta)</label>
+                        <input type="number" class="form-control" placeholder="10">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Descrição (Opcional)</label>
+                    <textarea class="form-control" rows="2" placeholder="Detalhes adicionais..."></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" onclick="fecharModal('modal-novo-produto')">Cancelar</button>
+                <button class="btn btn-primary" onclick="fecharModal('modal-novo-produto')">Salvar Produto</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-editar-produto" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>✏️ Editar Produto</h2>
+                <button class="close-btn" onclick="fecharModal('modal-editar-produto')">✖</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>ID do Produto</label>
+                    <input type="text" class="form-control" value="#001" disabled style="background: #2a2a2a;">
+                </div>
+                <div class="form-group">
+                    <label>Nome do Produto</label>
+                    <input type="text" class="form-control" value="Coca-Cola 2L">
+                </div>
+                <div class="form-row">
+                    <div class="form-group half">
+                        <label>Preço de Venda (R$)</label>
+                        <input type="text" class="form-control" value="12,50">
+                    </div>
+                    <div class="form-group half">
+                        <label>Estoque Mínimo</label>
+                        <input type="number" class="form-control" value="20">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Categoria</label>
+                    <select class="form-control">
+                        <option selected>Bebidas</option>
+                        <option>Limpeza</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" onclick="fecharModal('modal-editar-produto')">Cancelar</button>
+                <button class="btn btn-primary" onclick="fecharModal('modal-editar-produto')">Salvar Alterações</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-curva-abc" class="modal-overlay">
+    <div class="modal-content" style="width: 700px;">
+        <div class="modal-header">
+            <h2>📈 Inteligência de Vendas (Curva ABC)</h2>
+            <button class="close-btn" onclick="fecharModal('modal-curva-abc')">✖</button>
+        </div>
+        <div class="modal-body">
+            <table class="data-table">
+                <thead>
+                    <tr><th>Rank</th><th>Produto</th><th>% Faturamento</th><th>Classe</th><th>Sugestão</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>1</td><td>Coca-Cola 2L</td><td>45%</td><td style="color:#4caf50">Classe A</td><td>Repor Agora</td></tr>
+                    <tr><td>2</td><td>Pão Francês</td><td>30%</td><td style="color:#4caf50">Classe A</td><td>Repor Agora</td></tr>
+                    <tr><td>3</td><td>Detergente</td><td>10%</td><td style="color:#2196f3">Classe B</td><td>Monitorar</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary">Exportar Relatório PDF</button>
+        </div>
+    </div>
+</div>
+
+
+
+    <script src="script.js"></script>
+</body>
+
+</html>

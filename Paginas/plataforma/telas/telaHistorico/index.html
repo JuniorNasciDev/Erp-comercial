@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Histórico de Vendas</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <div class="dashboard-container">
+    <header class="header">
+      <div class="title-group">
+        <h1>Histórico de Vendas</h1>
+        <p>Registro completo de todas as suas transações.</p>
+      </div>
+      <div class="filter-group">
+        <select class="date-filter">
+          <option value="today">Hoje</option>
+          <option value="yesterday">Ontem</option>
+          <option value="this-week">Esta Semana</option>
+          <option value="this-month" selected>Este Mês</option>
+          <option value="last-30">Últimos 30 Dias</option>
+        </select>
+      </div>
+    </header>
+
+    <main class="main-content">
+      <div class="metric-cards">
+        <div class="card metric-card total-billing">
+          <div class="icon money-icon">💸</div>
+          <div class="metric-info">
+            <h3>FATURAMENTO NO PERÍODO</h3>
+            <p class="value positive">R$ 15.420,50</p>
+          </div>
+        </div>
+        <div class="card metric-card total-items">
+          <div class="icon box-icon">📦</div>
+          <div class="metric-info">
+            <h3>VENDAS CONCLUÍDAS</h3>
+            <p class="value">482 <span class="unit">unidades</span></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card history-card">
+        <div class="card-header">
+          <h3>Registro Detalhado</h3>
+
+          <div class="search-bar">
+            <span class="search-icon">🔍</span>
+            <input type="text" class="search-input" placeholder="Buscar por ID (ex: #00123)...">
+          </div>
+        </div>
+        <table class="history-table">
+          <thead>
+            <tr>
+              <th>ID da Venda</th>
+              <th>Data / Hora</th>
+              <th>Cliente</th>
+              <th>Produtos</th>
+              <th>Total</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>#00123</td>
+              <td>15/10/2023 10:30</td>
+              <td>João Silva</td>
+              <td>Coca-Cola 2L (2 un), Pão (10 un)</td>
+              <td class="total-value">R$ 54,50</td>
+              <td><span class="status status-completed">Concluída</span></td>
+            </tr>
+            <tr>
+              <td>#00122</td>
+              <td>15/10/2023 09:15</td>
+              <td>Maria Oliveira</td>
+              <td>Detergente (1 un)</td>
+              <td class="total-value">R$ 4,50</td>
+              <td><span class="status status-pending">Pendente</span></td>
+            </tr>
+            <tr>
+              <td>#00121</td>
+              <td>14/10/2023 18:00</td>
+              <td>Carlos Souza</td>
+              <td>Carvão 3kg (3 un)</td>
+              <td class="total-value">R$ 87,00</td>
+              <td><span class="status status-completed">Concluída</span></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="pagination">
+          <button class="btn btn-pagination btn-prev">Anterior</button>
+          <span class="page-num">Página 1 de 10</span>
+          <button class="btn btn-pagination btn-next">Próximo</button>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+
+</html>

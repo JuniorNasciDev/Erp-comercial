@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <div class="app" data-theme="dark">
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <button id="sidebarToggle" class="logo-btn" type="button" >
+          <span class="logo-mark"></span>
+          <span class="logo-text">Junior Nasci</span>
+        </button>
+      </div>
+
+<nav class="sidebar-nav">
+  <!-- Visão Geral -->
+  <div class="nav-section">
+    <span class="nav-label nav-text">Visão Geral</span>
+    <button class="nav-item active" data-view="dashboard" onclick="mudarBtnAtivo()" data-url="../telas/Dashboard/index.html">
+      <span class="nav-icon">📊</span>
+      <span class="nav-text">Dashboard</span>
+    </button>
+  </div>
+
+  <!-- Cadastros (Novo) -->
+  <div class="nav-section">
+    <span class="nav-label nav-text">Cadastros</span>
+    <button class="nav-item" data-view="partners" onclick="mudarBtnAtivo()" data-url="../telas/cadastroClienteFornecedor/index.html">
+      <span class="nav-icon">👥</span>
+      <span class="nav-text">Clientes/Fornecedores</span>
+    </button>
+     <button class="nav-item" data-view="partners" onclick="mudarBtnAtivo()" data-url="../telas/cadastroProdutos/index.html">
+      <span class="nav-icon">👥</span>
+      <span class="nav-text">Cadastrar Produtos</span>
+    </button>
+  </div>
+
+  <!-- Módulo Vendas -->
+  <div class="nav-section">
+    <span class="nav-label nav-text">Módulo Vendas</span>
+    <button class="nav-item" data-view="pdv" onclick="mudarBtnAtivo()" data-url="../telas/pdv/index.html">
+      <span class="nav-icon">💻</span>
+      <span class="nav-text">PDV (Caixa)</span>
+    </button>
+    <button class="nav-item" data-view="sales-history" onclick="mudarBtnAtivo()" data-url="../telas/telaHistorico/index.html">
+      <span class="nav-icon">🧾</span>
+      <span class="nav-text">Histórico de Vendas</span>
+    </button>
+  </div>
+
+  <!-- Módulo Estoque e Compras (Agrupados) -->
+  <div class="nav-section">
+    <span class="nav-label nav-text">Estoque e Compras</span>
+    <button class="nav-item" data-view="products" onclick="mudarBtnAtivo()" data-url="../telas/estoque/index.html">
+      <span class="nav-icon">📦</span>
+      <span class="nav-text">Produtos movimentação</span>
+    </button>
+    <button class="nav-item" data-view="purchases" onclick="mudarBtnAtivo()" data-url="../telas/categorias/index.html">
+      <span class="nav-icon">🚚</span>
+      <span class="nav-text">categorias</span>
+    </button>
+  </div>
+
+  <!-- Módulo Financeiro e Fiado -->
+  <div class="nav-section">
+    <span class="nav-label nav-text">Financeiro</span>
+    <button class="nav-item" data-view="payables" onclick="mudarBtnAtivo()" data-url="../telas/contasPagar/index.html">
+      <span class="nav-icon">📉</span>
+      <span class="nav-text">Contas a Pagar</span>
+    </button>
+    <button class="nav-item" data-view="receivables" onclick="mudarBtnAtivo()" data-url="../telas/contasReceber/index.html">
+      <span class="nav-icon">📈</span>
+      <span class="nav-text">Contas a Receber/Fiado</span>
+    </button>
+  </div>
+
+  <!-- Módulo Fiscal e Contábil -->
+  <div class="nav-section">
+    <span class="nav-label nav-text">Fiscal e Contábil</span>
+    <button class="nav-item" data-view="fiscal" onclick="mudarBtnAtivo()" data-url="../telas/emissorNotas/index.html">
+      <span class="nav-icon">⚖️</span>
+      <span class="nav-text">Emissor NF-e/NFC-e</span>
+    </button>
+    <button class="nav-item" data-view="accounting" onclick="mudarBtnAtivo()" data-url="../telas/meuContador/index.html">
+      <span class="nav-icon">📑</span>
+      <span class="nav-text">Meu Contador</span>
+    </button>
+  </div>
+
+  <!-- Configurações (Novo) -->
+  <div class="nav-section">
+    <span class="nav-label nav-text">Administração</span>
+    <button class="nav-item" data-view="settings" onclick="mudarBtnAtivo()" data-url="../telas/configuracao/index.html">
+      <span class="nav-icon">⚙️</span>
+      <span class="nav-text">Configurações</span>
+    </button>
+  </div>
+</nav>
+
+
+      <div class="sidebar-footer">
+        <div class="status-pill">
+          <span class="status-dot"></span>
+          <span class="status-text nav-text">Online</span>
+        </div>
+
+        <button class="pill-btn pill-btn-ghost small" id="compactToggle" type="button" onclick="sairSistema()">
+          sair do Sistema
+        </button>
+      </div>
+    </aside>
+
+    <!-- Corpo da pagina wireframe -->
+
+    <iframe id="corp-page" >
+
+    </iframe>
+
+
+  </div>
+
+
+  <script src="script.js"></script>
+</body>
+
+</html>

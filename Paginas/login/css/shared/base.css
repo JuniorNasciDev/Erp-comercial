@@ -1,0 +1,66 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  text-align: start;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+}
+
+.back {
+  position: fixed;
+  top: max(16px, env(safe-area-inset-top, 0px));
+  inset-inline-start: max(16px, env(safe-area-inset-start, 0px));
+  inset-inline-end: auto;
+  z-index: 90;
+  text-decoration: none;
+  transition: color 0.2s ease, background 0.2s ease, opacity 0.2s ease;
+}
+
+.back:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+
+.back__arrow {
+  display: inline-block;
+  transition: transform 0.22s ease;
+}
+
+[dir="rtl"] .back__arrow {
+  transform: scaleX(-1);
+}
+
+[dir="ltr"] .back__arrow {
+  transform: none;
+}
+
+[dir="rtl"] .back:hover .back__arrow,
+[dir="rtl"] .back:focus-visible .back__arrow {
+  transform: scaleX(-1) translateX(3px);
+}
+
+[dir="ltr"] .back:hover .back__arrow,
+[dir="ltr"] .back:focus-visible .back__arrow {
+  transform: translateX(-3px);
+}
+
+.shell {
+  position: relative;
+  z-index: 1;
+  min-height: 100%;
+  display: grid;
+  place-items: center;
+  padding-block: 72px 40px;
+  padding-inline: clamp(16px, 4vw, 28px);
+}

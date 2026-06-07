@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Contador - Painel Fiscal Avançado</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-title">
+                <h1>Meu Contador</h1>
+                <p>Central avançada de exportação de XML e relatórios fiscais.</p>
+            </div>
+            
+            <div class="badge success" style="display: flex; align-items: center; gap: 8px; text-transform: none; font-size: 0.95rem;">
+                <span style="width: 8px; height: 8px; background: currentColor; border-radius: 50%; display: inline-block;"></span>
+                Certificado A1: Válido até 12/2026
+            </div>
+        </header>
+
+        <main>
+            <section class="form-card" style="margin-bottom: 2rem;">
+                <h2 class="section-title">Filtros de Busca</h2>
+                
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="dataInicio">Data Inicial:</label>
+                        <input type="date" id="dataInicio" value="2026-03-01">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="dataFim">Data Final:</label>
+                        <input type="date" id="dataFim" value="2026-03-31">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="statusNota">Status da Nota:</label>
+                        <select id="statusNota">
+                            <option value="todas">Todas</option>
+                            <option value="autorizadas">Apenas Autorizadas</option>
+                            <option value="canceladas">Apenas Canceladas</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group" style="justify-content: flex-end;">
+                        <button id="btnFiltrar" class="btn-cancelar" style="width: 100%;">Aplicar Filtros</button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="summary-totais" style="margin-bottom: 2rem; justify-content: space-between;">
+                <div class="totais-item align-left" style="align-items: flex-start;">
+                    <span>Total Faturado no Período</span>
+                    <strong id="totalFaturado">R$ 51.000,00</strong>
+                </div>
+                <div class="totais-item">
+                    <span>NF-es Emitidas</span>
+                    <strong id="totalNFe">165</strong>
+                </div>
+                <div class="totais-item">
+                    <span>Notas Canceladas</span>
+                    <strong id="totalCanceladas" style="color: var(--danger);">5</strong>
+                </div>
+                <div class="totais-item highlight-profit">
+                    <span>Impostos Retidos</span>
+                    <strong id="totalImpostos">R$ 3.120,00</strong>
+                </div>
+            </section>
+
+            <section class="form-card">
+                <h2 class="section-title">Exportação de Dados</h2>
+                
+                <div class="form-grid" style="margin-bottom: 2rem;">
+                    <div class="form-group">
+                        <label style="font-size: 1rem; color: var(--text-main);">O que incluir no pacote?</label>
+                        <div class="divider-interna"></div>
+                        <label style="display: flex; gap: 10px; align-items: center; cursor: pointer; margin-top: 10px;">
+                            <input type="checkbox" id="chkNfe" checked style="width: auto;"> XMLs NF-e (Produtos)
+                        </label>
+                        <label style="display: flex; gap: 10px; align-items: center; cursor: pointer; margin-top: 10px;">
+                            <input type="checkbox" id="chkNfse" checked style="width: auto;"> XMLs NFS-e (Serviços)
+                        </label>
+                        <label style="display: flex; gap: 10px; align-items: center; cursor: pointer; margin-top: 10px;">
+                            <input type="checkbox" id="chkRelatorio" checked style="width: auto;"> Relatório Analítico (Excel)
+                        </label>
+                    </div>
+
+                    <div class="form-group">
+                        <label style="font-size: 1rem; color: var(--text-main);">Estrutura do Arquivo</label>
+                        <div class="divider-interna"></div>
+                        <label style="display: flex; gap: 10px; align-items: center; cursor: pointer; margin-top: 10px;">
+                            <input type="radio" name="formato" value="zip-pastas" checked style="width: auto;"> ZIP (Organizado por Ano/Mês/Status)
+                        </label>
+                        <label style="display: flex; gap: 10px; align-items: center; cursor: pointer; margin-top: 10px;">
+                            <input type="radio" name="formato" value="zip-solto" style="width: auto;"> ZIP (Todos os arquivos juntos)
+                        </label>
+                    </div>
+                </div>
+
+                <div class="divider"></div>
+
+                <button id="btnExportar" class="btn-salvar" style="width: 100%;">
+                    Gerar Pacote Contábil do Período Selecionado
+                </button>
+            </section>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

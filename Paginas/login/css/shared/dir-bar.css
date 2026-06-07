@@ -1,0 +1,55 @@
+.dir-bar {
+  position: static;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px;
+  border-radius: 100px;
+  background: rgba(12, 12, 14, 0.72);
+  backdrop-filter: blur(16px) saturate(1.2);
+  -webkit-backdrop-filter: blur(16px) saturate(1.2);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.dir-bar__btn {
+  font-family: var(--font-sans);
+  font-weight: var(--weight-semibold);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  padding: 9px 14px;
+  border-radius: 100px;
+  border: none;
+  background: transparent;
+  color: rgba(250, 250, 249, 0.82);
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.15s ease;
+}
+
+.dir-bar__btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fafaf9;
+}
+
+.dir-bar__btn:active {
+  transform: scale(0.98);
+}
+
+.dir-bar__btn:focus-visible {
+  outline: 2px solid rgba(214, 184, 140, 0.55);
+  outline-offset: 2px;
+}
+
+body.has-dir-bar {
+  padding-top: 0;
+}
+
+body.has-dir-bar .hub,
+body.has-dir-bar .shell {
+  padding-top: clamp(28px, 6vw, 56px);
+}
+
+body.has-dir-bar .back {
+  top: max(16px, env(safe-area-inset-top, 0px));
+  inset-inline-start: max(16px, env(safe-area-inset-start, 0px));
+}

@@ -1,0 +1,73 @@
+.ico {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.28s ease, background 0.28s ease,
+    border-color 0.28s ease, color 0.22s ease, opacity 0.28s ease;
+}
+
+.ico svg {
+  overflow: visible;
+}
+
+.ico .ico__stroke {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.35;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.ico--draw .ico__stroke,
+.ico--draw .ico__stroke--orbit {
+  stroke-dasharray: none;
+  stroke-dashoffset: 0;
+}
+
+.ico--pulse {
+  animation: none;
+}
+
+.ico[data-interactive]:hover {
+  transform: translateY(-2px);
+}
+
+.hub-card:hover .ico[data-interactive],
+.hub-card:focus-visible .ico[data-interactive] {
+  transform: translateY(-2px);
+}
+
+.theme-futuristic .panel__icon .ico[data-interactive]:hover,
+.theme-glass .panel__icon .ico[data-interactive]:hover,
+.theme-minimal .panel__icon .ico[data-interactive]:hover,
+.theme-cyberpunk .panel__icon .ico[data-interactive]:hover {
+  transform: translateY(-2px);
+}
+
+.ico[data-interactive].is-tap {
+  transform: translateY(0) scale(0.96);
+  transition-duration: 0.1s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ico,
+  .ico .ico__stroke {
+    transition: none !important;
+    animation: none !important;
+  }
+
+  .ico[data-interactive]:hover,
+  .hub-card:hover .ico[data-interactive],
+  .hub-card:focus-visible .ico[data-interactive],
+  .theme-futuristic .panel__icon .ico[data-interactive]:hover,
+  .theme-glass .panel__icon .ico[data-interactive]:hover,
+  .theme-minimal .panel__icon .ico[data-interactive]:hover,
+  .theme-cyberpunk .panel__icon .ico[data-interactive]:hover {
+    transform: none;
+  }
+
+  .ico[data-interactive].is-tap {
+    transform: none;
+  }
+}

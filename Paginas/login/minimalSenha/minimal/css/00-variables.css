@@ -1,0 +1,9 @@
+:root {
+  --mn-bg: #0f1419;
+  --mn-panel: rgba(18, 24, 32, 0.88);
+  --mn-line: rgba(203, 213, 225, 0.14);
+  --mn-text: rgba(248, 250, 252, 0.96);
+  --mn-muted: rgba(148, 163, 184, 0.85);
+  --mn-accent: #c4a574;
+  --mn-radius: 16px;
+}

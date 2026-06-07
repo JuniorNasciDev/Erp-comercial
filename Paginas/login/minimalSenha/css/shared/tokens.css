@@ -1,0 +1,48 @@
+:root {
+  --font-sans: "Tajawal", "Noto Sans Arabic", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono-cyber: "Tajawal", "Noto Sans Arabic", ui-sans-serif, sans-serif;
+  --weight-regular: 400;
+  --weight-semibold: 500;
+  --weight-bold: 700;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-weight: var(--weight-regular);
+  line-height: 1.65;
+}
+
+h1,
+h2,
+h3,
+.font-bold,
+.panel__title,
+.hub__title,
+.hub-card__title {
+  font-weight: var(--weight-bold);
+  line-height: 1.25;
+}
+
+[dir="rtl"] h1,
+[dir="rtl"] h2,
+[dir="rtl"] h3,
+[dir="rtl"] .panel__title,
+[dir="rtl"] .hub__title,
+[dir="rtl"] .hub-card__title {
+  letter-spacing: 0;
+}
+
+.btn,
+.hub-card__cta {
+  font-weight: var(--weight-bold);
+}
+
+.panel__eyebrow {
+  font-weight: var(--weight-semibold);
+}

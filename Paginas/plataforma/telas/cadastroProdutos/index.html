@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro Avançado de Produto</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-title">
+                <h1>📦 Cadastro Avançado de Produto</h1>
+                <p>Preenchimento completo para identificação, precificação e tributação do produto.</p>
+            </div>
+
+
+            <div class="import-wrapper">
+                <div class="upload-area" onclick="document.getElementById('fileInput').click()">
+                    <span class="upload-icon">📥</span>
+                    <p>Importação Rápida</p>
+                    <small>Arraste ou clique (.xlsx, .csv)</small>
+                    <input type="file" id="fileInput" class="hidden" accept=".xlsx, .csv">
+                    
+                </div>
+                
+            </div>
+        </header>
+
+        <div class="tabs">
+            <button type="button" class="tab-btn active" onclick="openTab(event, 'basico')">1. Dados Básicos</button>
+            <button type="button" class="tab-btn" onclick="openTab(event, 'preco')">2. Formação de Preço</button>
+            <button type="button" class="tab-btn" onclick="openTab(event, 'fiscal')">3. Tributação</button>
+            <button type="button" class="tab-btn" onclick="openTab(event, 'fornecedor')">4. Fornecedores</button>
+            <button type="button" class="tab-btn" onclick="openTab(event, 'midia')">5. Fotos</button>
+        </div>
+
+        <form id="produtoForm" class="form-card">
+
+            <div id="basico" class="tab-content active">
+                <h3 class="section-title">INFORMAÇÕES PRINCIPAIS</h3>
+                <div class="form-grid">
+                    <div class="form-group span-2">
+                        <label for="nome">Nome do Produto *</label>
+                        <input type="text" id="nome" placeholder="Ex: Coca-Cola 2L Pet Retornável" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="tipo">Tipo do Item</label>
+                        <select id="tipo">
+                            <option value="00">00 - Mercadoria para Revenda</option>
+                            <option value="01">01 - Matéria-Prima</option>
+                            <option value="04">04 - Produto Acabado</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="status">Status</label>
+                        <select id="status">
+                            <option value="ativo">🟢 Ativo</option>
+                            <option value="inativo">🔴 Inativo</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="categoria">Categoria *</label>
+                        <select id="categoria" required>
+                            <option value="bebidas-frias">Bebidas Frias</option>
+                            <option value="mercearia">Mercearia</option>
+                            <option value="limpeza">Limpeza</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="marca">Marca</label>
+                        <input type="text" id="marca" placeholder="Ex: Coca-Cola">
+                    </div>
+                </div>
+
+                <div class="divider"></div>
+
+                <h3 class="section-title">CÓDIGOS DE IDENTIFICAÇÃO</h3>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="sku">Código Interno (SKU) *</label>
+                        <input type="text" id="sku" placeholder="Ex: BEB-COC-2L" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="codigoBarras">Código de Barras (EAN/GTIN)</label>
+                        <input type="text" id="codigoBarras" placeholder="Ex: 7894900011517">
+                    </div>
+                    <div class="form-group">
+                        <label for="unidade">Unidade de Medida Comercial</label>
+                        <select id="unidade">
+                            <option value="UN">UN - Unidade</option>
+                            <option value="KG">KG - Quilograma</option>
+                            <option value="LT">LT - Litro</option>
+                            <option value="CX">CX - Caixa</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group span-2" style="margin-top: 1.5rem;">
+                    <label for="descricao">Descrição Detalhada / Aplicação</label>
+                    <textarea id="descricao" rows="4"
+                        placeholder="Informações adicionais sobre o produto, ficha técnica ou aplicação..."></textarea>
+                </div>
+            </div>
+
+            <div id="preco" class="tab-content">
+                <h3 class="section-title">FORMAÇÃO DE PREÇO E LUCRO</h3>
+                <div class="pricing-calculator">
+                    <div class="pricing-group">
+                        <h4 class="group-title">1. Custos de Aquisição</h4>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="custo">Preço de Custo (R$)</label>
+                                <input type="number" id="custo" step="0.01" placeholder="0.00" oninput="calcularPelaMargem()">
+                            </div>
+                            <div class="form-group">
+                                <label for="custosExtras">Despesas/Frete (R$)</label>
+                                <input type="number" id="custosExtras" step="0.01" placeholder="0.00" oninput="calcularPelaMargem()">
+                            </div>
+                        </div>
+                        <div class="summary-box">
+                            <span>Custo Total do Produto:</span>
+                            <strong id="custoTotalDisplay">R$ 0,00</strong>
+                        </div>
+                    </div>
+
+                    <div class="pricing-group">
+                        <h4 class="group-title">2. Margem e Venda</h4>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="margem">Margem (%)</label>
+                                <input type="number" id="margem" placeholder="Ex: 40" oninput="calcularPelaMargem()">
+                            </div>
+                            <div class="form-group">
+                                <label for="venda">Preço de Venda (R$) *</label>
+                                <input type="number" id="venda" step="0.01" placeholder="0.00" required oninput="calcularPeloPrecoVenda()">
+                            </div>
+                        </div>
+                        <div class="summary-box highlight-profit">
+                            <span>Lucro Líquido por Unidade:</span>
+                            <strong id="lucroDisplay">R$ 0,00</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="fiscal" class="tab-content">
+                <div class="alert-box">
+                    ⚠️ Atenção: Consulte seu contador para preencher estes dados corretamente. Erros fiscais impedem a
+                    emissão de notas.
+                </div>
+                <h3 class="section-title">CLASSIFICAÇÃO FISCAL</h3>
+                <div class="form-grid">
+                    <div class="form-group span-2">
+                        <label for="origem">Origem do Produto *</label>
+                        <select id="origem" required>
+                            <option value="0">0 - Nacional</option>
+                            <option value="1">1 - Estrangeira - Importação Direta</option>
+                            <option value="2">2 - Estrangeira - Adquirida no Mercado Interno</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="ncm">NCM *</label>
+                        <input type="text" id="ncm" placeholder="Ex: 2202.10.00" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="cest">CEST</label>
+                        <input type="text" id="cest" placeholder="Ex: 03.007.00">
+                    </div>
+                </div>
+            </div>
+
+            <div id="fornecedor" class="tab-content">
+                <h3 class="section-title">DADOS DE COMPRA</h3>
+                <div class="form-grid">
+                    <div class="form-group span-2">
+                        <label for="fornecedorPadrao">Fornecedor Principal</label>
+                        <select id="fornecedorPadrao">
+                            <option value="">Selecione um fornecedor...</option>
+                            <option value="1">Coca-Cola Indústrias Ltda</option>
+                            <option value="2">Ambev S.A.</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="codigoFornecedor">Código no Fornecedor</label>
+                        <input type="text" id="codigoFornecedor" placeholder="Ex: REF-4509">
+                    </div>
+                </div>
+            </div>
+
+            <div id="midia" class="tab-content">
+                <h3 class="section-title">IMAGENS DO PRODUTO</h3>
+                <div class="upload-area" style="padding: 4rem;">
+                    <span class="upload-icon" style="font-size: 2rem; margin-bottom: 1rem;">📸</span>
+                    <p>Arraste e solte fotos do produto aqui</p>
+                    <small>Ou clique para buscar no seu computador</small>
+                </div>
+            </div>
+
+            <div class="actions">
+                <button type="button" class="btn-cancelar">Cancelar</button>
+                <button type="submit" class="btn-salvar" id="btnSalvar" disabled>💾 Salvar Produto</button>
+            </div>
+        </form>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

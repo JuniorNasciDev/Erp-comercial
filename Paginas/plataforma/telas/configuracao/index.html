@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configurações do Sistema</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-title">
+                <h1>Configurações</h1>
+                <p>Gerencie os dados da empresa, integrações, usuários e sua assinatura.</p>
+            </div>
+        </header>
+
+        <div class="tabs-header">
+            <button class="tab-btn active" data-target="tab-estabelecimento">Meu Estabelecimento</button>
+            <button class="tab-btn" data-target="tab-pdv">Frente de Caixa (PDV)</button>
+            <button class="tab-btn" data-target="tab-usuarios">Usuários e Permissões</button>
+            <button class="tab-btn" data-target="tab-planos">Planos e Faturamento</button>
+        </div>
+
+        <div id="tab-estabelecimento" class="tab-content active">
+            
+            <div class="form-card">
+                <div class="header-with-badge" style="justify-content: space-between; margin-bottom: 1.5rem;">
+                    <div>
+                        <h3 class="section-title" style="margin: 0;">Dados da Empresa e Endereço</h3>
+                        <p class="text-muted" style="font-size: 0.85rem; margin-top: 0.25rem;">Informações utilizadas para emissão de notas fiscais e rodapé de documentos.</p>
+                    </div>
+                    <span class="badge success" title="Todos os dados obrigatórios preenchidos">Cadastro Completo</span>
+                </div>
+
+                <div class="form-grid">
+                    <div class="form-group span-2">
+                        <label>Razão Social</label>
+                        <input type="text" placeholder="Nome jurídico registrado no CNPJ" value="Minha Empresa LTDA">
+                    </div>
+                    <div class="form-group">
+                        <label>CNPJ</label>
+                        <input type="text" placeholder="00.000.000/0001-00" value="12.345.678/0001-99">
+                    </div>
+                    
+                    <div class="form-group span-2">
+                        <label>Nome Fantasia</label>
+                        <input type="text" placeholder="Nome popular da sua loja" value="Minha Loja">
+                    </div>
+                    <div class="form-group">
+                        <label>Inscrição Estadual (IE)</label>
+                        <input type="text" placeholder="Apenas números ou 'ISENTO'">
+                    </div>
+
+                    <div class="form-group span-2">
+                        <label>E-mail Corporativo</label>
+                        <input type="email" placeholder="contato@empresa.com.br" value="contato@empresa.com">
+                    </div>
+                    <div class="form-group">
+                        <label>Telefone / WhatsApp</label>
+                        <input type="text" placeholder="(00) 00000-0000">
+                    </div>
+                </div>
+
+                <div class="divider-interna"></div>
+
+                <h4 style="color: var(--text-main); font-size: 1rem; margin-bottom: 1.25rem; font-weight: 600;">Endereço de Operação</h4>
+                
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>CEP</label>
+                        <div style="display: flex; gap: 0.5rem;">
+                            <input type="text" id="cep" placeholder="00000-000" maxlength="9">
+                        </div>
+                    </div>
+                    <div class="form-group span-2">
+                        <label>Logradouro (Rua, Avenida, etc.)</label>
+                        <input type="text" id="rua" placeholder="Ex: Av. Paulista">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Número</label>
+                        <input type="text" id="numero" placeholder="Ex: 1000">
+                    </div>
+                    <div class="form-group">
+                        <label>Complemento</label>
+                        <input type="text" id="complemento" placeholder="Sala, Galpão, Andar...">
+                    </div>
+                    <div class="form-group">
+                        <label>Bairro</label>
+                        <input type="text" id="bairro" placeholder="Ex: Bela Vista">
+                    </div>
+
+                    <div class="form-group span-2">
+                        <label>Cidade</label>
+                        <input type="text" id="cidade" placeholder="Ex: São Paulo">
+                    </div>
+                    <div class="form-group">
+                        <label>Estado (UF)</label>
+                        <input type="text" id="uf" placeholder="Ex: SP" maxlength="2" style="text-transform: uppercase;">
+                    </div>
+                </div>
+
+                <div class="actions" style="margin-top: 2rem;">
+                    <button class="btn-secundario" style="margin-right: 1rem;">Consultar Cartão CNPJ</button>
+                </div>
+            </div>
+
+            <div class="form-grid">
+                <div class="form-card" style="margin-bottom: 0;">
+                    <h3 class="section-title">Dados Bancários</h3>
+                    <p class="text-muted" style="font-size: 0.85rem; margin-bottom: 1rem;">Conta para recebimentos diretos e transferências.</p>
+                    <div class="form-group" style="margin-bottom: 1rem;">
+                        <label>Banco</label>
+                        <select>
+                            <option value="001">001 - Banco do Brasil</option>
+                            <option value="104">104 - Caixa Econômica</option>
+                            <option value="341">341 - Itaú</option>
+                            <option value="237">237 - Bradesco</option>
+                            <option value="260">260 - Nubank</option>
+                        </select>
+                    </div>
+                    <div class="form-grid" style="grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <div class="form-group">
+                            <label>Agência</label>
+                            <input type="text" placeholder="0000-0">
+                        </div>
+                        <div class="form-group">
+                            <label>Conta</label>
+                            <input type="text" placeholder="0000000-0">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-card" style="margin-bottom: 0;">
+                    <div class="header-with-badge" style="justify-content: space-between; margin-bottom: 1rem;">
+                        <h3 class="section-title" style="margin: 0;">Gateways de Pagamento</h3>
+                        <span class="badge info" id="status-gateway">Configurar</span>
+                    </div>
+                    <p class="text-muted" style="font-size: 0.85rem; margin-bottom: 1.5rem;">Integração para emissão de Boletos e PIX automático.</p>
+                    
+                    <div class="form-grid" style="grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <div class="form-group">
+                            <label>Provedor Selecionado</label>
+                            <select id="select-gateway">
+                                <option value="nenhum">Nenhum</option>
+                                <option value="mercado_pago">Mercado Pago</option>
+                                <option value="asaas">Asaas</option>
+                                <option value="pagarme">Pagar.me</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Status da Integração</label>
+                            <div style="height: 44px; display: flex; align-items: center; color: var(--text-muted); font-size: 0.85rem;">
+                                <span id="gateway-status-text">Aguardando chaves...</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group" style="margin-top: 1rem;">
+                        <label>Access Token (Chave de API Secreta)</label>
+                        <div style="display: flex; gap: 0.5rem;">
+                            <input type="password" id="gateway-token" placeholder="Cole seu token secreto aqui">
+                            <button type="button" class="btn-secundario" id="btn-testar-gateway" style="white-space: nowrap;">
+                                Testar Conexão
+                            </button>
+                        </div>
+                        <p class="text-muted" style="font-size: 0.75rem; margin-top: 0.5rem;">
+                            * Nunca compartilhe sua chave privada. O sistema a manterá criptografada.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-card" style="margin-top: 1.5rem;">
+                <div class="header-with-badge">
+                    <h3 class="section-title" style="margin: 0;">Configuração de Emissão de Boletos (Carteira Própria)</h3>
+                    <span class="badge info">Requer Homologação</span>
+                </div>
+                <p class="text-muted" style="font-size: 0.85rem; margin-bottom: 1.5rem;">Preencha os dados fornecidos pelo seu gerente bancário para registrar e emitir boletos pelo sistema.</p>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Código do Cedente / Convênio</label>
+                        <input type="text" placeholder="Ex: 1234567">
+                    </div>
+                    <div class="form-group">
+                        <label>Número da Carteira</label>
+                        <input type="text" placeholder="Ex: 17, 109, 18">
+                    </div>
+                    <div class="form-group">
+                        <label>Variação da Carteira</label>
+                        <input type="text" placeholder="Ex: 019 (Apenas BB)">
+                    </div>
+                    <div class="form-group">
+                        <label>Juros ao Mês (%)</label>
+                        <input type="number" placeholder="1.00" step="0.01">
+                    </div>
+                    <div class="form-group">
+                        <label>Multa por Atraso (%)</label>
+                        <input type="number" placeholder="2.00" step="0.01">
+                    </div>
+                    <div class="form-group">
+                        <label>Dias para Protesto / Baixa</label>
+                        <input type="number" placeholder="Ex: 30" step="1">
+                    </div>
+                    <div class="form-group span-2">
+                        <label>Instruções Padrão (Impressas no Boleto)</label>
+                        <textarea rows="2" placeholder="Ex: Após o vencimento, cobrar multa de 2% e juros de 1% ao mês. Não receber após 30 dias de atraso."></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="actions" style="margin-top: 2rem; border-top: 1px solid var(--border-color); padding-top: 1.5rem;">
+                <button class="btn-salvar">Salvar Configurações Gerais</button>
+            </div>
+        </div>
+        <div id="tab-pdv" class="tab-content">
+            <form class="pdv-form" onsubmit="event.preventDefault();">
+                <div class="form-grid">
+                    
+                    <div class="form-card">
+                        <div class="card-header">
+                            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                            <h3 class="section-title">Comportamento do Caixa</h3>
+                        </div>
+                        
+                        <div class="toggle-list">
+                            <div class="toggle-item">
+                                <div class="toggle-info">
+                                    <label for="toggle-estoque" class="toggle-title">Permitir Venda com Estoque Negativo</label>
+                                    <span class="toggle-desc">O caixa poderá vender itens que constam zerados no sistema.</span>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" id="toggle-estoque">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                            
+                            <div class="toggle-item">
+                                <div class="toggle-info">
+                                    <label for="toggle-desconto" class="toggle-title">Senha para Descontos</label>
+                                    <span class="toggle-desc">Exigir senha de gerente para aplicar descontos maiores que 5%.</span>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" id="toggle-desconto" checked>
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-card">
+                        <div class="card-header">
+                            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+                            <h3 class="section-title">Impressão de Cupons (NFCe)</h3>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="formato-impressao" class="form-label">Formato de Impressão Padrão</label>
+                            <select id="formato-impressao" class="form-input">
+                                <option value="80mm">Bobina Térmica 80mm</option>
+                                <option value="58mm">Bobina Térmica 58mm</option>
+                                <option value="a4">Folha A4 (PDF Tradicional)</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group" style="margin-top: 1rem;">
+                            <label for="mensagem-rodape" class="form-label">Mensagem no Rodapé do Recibo</label>
+                            <textarea id="mensagem-rodape" class="form-input" rows="3" placeholder="Ex: Trocas somente com cupom original."></textarea>
+                            <span class="help-text" style="font-size: 0.8rem; color: var(--text-muted); display: block; margin-top: 0.5rem;">Esta mensagem será impressa no final de todos os cupons.</span>
+                        </div>
+                    </div>
+                    
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn-salvar">
+                        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+                        Salvar Configurações do PDV
+                    </button>
+                </div>
+            </form>
+        </div>
+        <div id="tab-usuarios" class="tab-content">
+            <div class="form-card">
+                <div class="header-with-badge" style="justify-content: space-between; margin-bottom: 1.5rem;">
+                    <div>
+                        <h3 class="section-title" style="margin: 0;">Equipe e Acessos</h3>
+                        <p class="text-muted" style="font-size: 0.85rem; margin-top: 0.25rem;">Convide colaboradores e defina flags de permissão para cada módulo.</p>
+                    </div>
+                    <button type="button" class="btn-salvar" id="btn-abrir-modal-usuario">+ Convidar Usuário</button>
+                </div>
+                
+                <div class="table-responsive">
+                    <table class="xml-table">
+                        <thead>
+                            <tr>
+                                <th>Usuário / E-mail</th>
+                                <th>Status</th>
+                                <th>Nível de Acesso</th>
+                                <th>Módulos Liberados</th>
+                                <th style="text-align: center;">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <strong>Carlos (Você)</strong><br>
+                                    <span class="text-muted" style="font-size: 0.8rem;">carlos@empresa.com</span>
+                                </td>
+                                <td><span class="badge success">Ativo</span></td>
+                                <td><span class="badge info">Proprietário</span></td>
+                                <td style="font-size: 0.85rem; color: var(--primary);">Acesso Total (Admin)</td>
+                                <td class="actions-cell">
+                                    <button class="btn-icon" disabled>⚙️</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong>Maria Caixa</strong><br>
+                                    <span class="text-muted" style="font-size: 0.8rem;">maria@empresa.com</span>
+                                </td>
+                                <td><span class="badge success">Ativo</span></td>
+                                <td><span class="badge warning">Restrito</span></td>
+                                <td style="font-size: 0.85rem;">PDV, Cadastros</td>
+                                <td class="actions-cell">
+                                    <button class="btn-icon">⚙️</button>
+                                    <button class="btn-icon btn-remover">X</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div id="tab-planos" class="tab-content">
+            <div class="form-grid">
+                <div class="form-card" style="border-left: 4px solid var(--primary); margin-bottom: 0;">
+                    <h3 class="section-title" style="margin: 0 0 0.5rem 0;">Seu Plano Atual: <span class="text-highlight">PRO</span></h3>
+                    <p class="text-muted" style="font-size: 0.9rem; margin-bottom: 1.5rem;">Ciclo de faturamento: Mensal</p>
+                    <div style="background: var(--bg-input); padding: 1rem; border-radius: 0.5rem; display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <span style="color: var(--text-muted); font-size: 0.85rem;">Próxima cobrança</span><br>
+                            <strong style="font-size: 1.25rem;">R$ 149,90</strong>
+                        </div>
+                        <div style="text-align: right;">
+                            <span style="color: var(--text-muted); font-size: 0.85rem;">Vencimento</span><br>
+                            <strong style="color: var(--text-main);">10/08/2026</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-card" style="margin-bottom: 0; padding: 1.5rem;">
+                    <h3 class="section-title" style="margin-bottom: 1rem;">Últimas Faturas</h3>
+                    <div class="table-responsive" style="margin-bottom: 0;">
+                        <table class="xml-table" style="font-size: 0.85rem;">
+                            <thead>
+                                <tr>
+                                    <th>Data</th>
+                                    <th>Valor</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>10/07/2026</td>
+                                    <td>R$ 149,90</td>
+                                    <td><span class="badge success">Pago</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+            <h3 class="section-title">Alterar Plano de Assinatura</h3>
+            
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h4 class="pricing-title">Starter</h4>
+                    <p class="pricing-desc">Para quem está começando a vender.</p>
+                    <div class="pricing-value">R$ 89<span>/mês</span></div>
+                    <button class="btn-secundario" disabled>Fazer Downgrade</button>
+                </div>
+
+                <div class="pricing-card active">
+                    <div class="pricing-badge">Plano Atual</div>
+                    <h4 class="pricing-title">Pro</h4>
+                    <p class="pricing-desc">O ideal para lojas estabelecidas.</p>
+                    <div class="pricing-value">R$ 149<span>/mês</span></div>
+                    <button class="btn-salvar" disabled>Ativo no Momento</button>
+                </div>
+
+                <div class="pricing-card">
+                    <h4 class="pricing-title">Enterprise</h4>
+                    <p class="pricing-desc">Para redes e alta volumetria.</p>
+                    <div class="pricing-value">R$ 299<span>/mês</span></div>
+                    <button class="btn-secundario btn-upgrade" onclick="simularUpgrade(this)">Fazer Upgrade</button>
+                </div>
+            </div>
+        </div>
+        
+    </div> <div id="modal-usuario" class="modal hidden-section">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3 class="section-title" style="margin: 0;">Permissões do Colaborador</h3>
+                <p class="text-muted" style="font-size: 0.85rem; margin-top: 0.25rem;">Enviaremos um link temporário para o e-mail cadastrado definir a senha.</p>
+            </div>
+            
+            <div class="modal-body">
+                <div class="form-grid" style="margin-bottom: 2rem;">
+                    <div class="form-group span-2">
+                        <label>Nome Completo do Colaborador</label>
+                        <input type="text" id="novo_user_nome" placeholder="Ex: Ana Silva">
+                    </div>
+                    <div class="form-group span-2">
+                        <label>E-mail de Acesso (Login)</label>
+                        <input type="email" id="novo_user_email" placeholder="ana.silva@suaempresa.com">
+                    </div>
+                </div>
+
+                <div class="divider-interna"></div>
+                <h3 class="section-title" style="font-size: 1rem;">Flags de Acesso (Módulos)</h3>
+                
+                <div class="form-grid" style="gap: 1rem; margin-top: 1rem;">
+                    <div class="toggle-item" style="background: var(--bg-input); padding: 1rem; border-radius: 0.5rem; border: 1px solid var(--border-color);">
+                        <div class="toggle-info">
+                            <strong style="color: var(--primary);">PDV / Caixa</strong>
+                            <span style="font-size: 0.75rem;">Realizar vendas e emitir NFCe.</span>
+                        </div>
+                        <label class="switch"><input type="checkbox" checked><span class="slider round"></span></label>
+                    </div>
+                    
+                    <div class="toggle-item" style="background: var(--bg-input); padding: 1rem; border-radius: 0.5rem; border: 1px solid var(--border-color);">
+                        <div class="toggle-info">
+                            <strong>Estoque e Cadastros</strong>
+                            <span style="font-size: 0.75rem;">Entrada de notas e produtos.</span>
+                        </div>
+                        <label class="switch"><input type="checkbox"><span class="slider round"></span></label>
+                    </div>
+
+                    <div class="toggle-item" style="background: var(--bg-input); padding: 1rem; border-radius: 0.5rem; border: 1px solid var(--border-color);">
+                        <div class="toggle-info">
+                            <strong>Faturamento (NFe)</strong>
+                            <span style="font-size: 0.75rem;">Emitir boletos e NFe.</span>
+                        </div>
+                        <label class="switch"><input type="checkbox"><span class="slider round"></span></label>
+                    </div>
+
+                    <div class="toggle-item" style="background: rgba(239, 68, 68, 0.05); padding: 1rem; border-radius: 0.5rem; border: 1px dashed var(--danger);">
+                        <div class="toggle-info">
+                            <strong style="color: var(--danger);">Financeiro / Relatórios</strong>
+                            <span style="font-size: 0.75rem;">Acesso ao fluxo de caixa total.</span>
+                        </div>
+                        <label class="switch"><input type="checkbox"><span class="slider round"></span></label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer actions" style="margin-top: 2rem; border-top: 1px solid var(--border-color); padding-top: 1.5rem;">
+                <button type="button" class="btn-cancelar" id="btn-fechar-modal-usuario">Cancelar</button>
+                <button type="button" class="btn-salvar" id="btn-enviar-convite">Enviar Convite</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>

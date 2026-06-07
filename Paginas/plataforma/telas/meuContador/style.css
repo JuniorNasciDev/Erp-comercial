@@ -1,0 +1,243 @@
+/* ==========================================================================
+   1. VARIÁVEIS GLOBAIS E CONFIGURAÇÃO BASE (Tema Escuro)
+   ========================================================================== */
+:root {
+    --bg-base: #0f172a;        /* Fundo principal (Azul escuro profundo) */
+    --bg-surface: #1e293b;     /* Fundo dos cartões (Azul acinzentado) */
+    --bg-input: #334155;       /* Fundo das caixas de texto */
+    --border-color: #334155;   /* Cor das linhas e divisórias */
+    
+    --primary: #3b82f6;        /* Azul principal de destaque */
+    --primary-hover: #2563eb;  /* Azul mais forte para hover */
+    --success: #10b981;        /* Verde (Autorizado, Sucesso, Lucro) */
+    --warning: #f59e0b;        /* Laranja (Alertas, Avisos) */
+    --danger: #ef4444;         /* Vermelho (Erros, Faltam dados) */
+    
+    --text-main: #f8fafc;      /* Texto principal (Branco gelo) */
+    --text-muted: #94a3b8;     /* Texto secundário (Cinza azulado) */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+}
+
+body {
+    background-color: var(--bg-base);
+    color: var(--text-main);
+    min-height: 100vh;
+    padding: 2rem;
+    color-scheme: dark; /* Força o calendário e os checkboxes a ficarem escuros */
+}
+
+.container {
+    margin: 0 auto;
+    max-width: 1100px;
+}
+
+/* ==========================================================================
+   2. CABEÇALHO E BOTÕES
+   ========================================================================== */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.header-title h1 {
+    font-size: 1.75rem;
+    color: var(--text-main);
+    letter-spacing: -0.5px;
+}
+
+.header-title p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    margin-top: 0.35rem;
+}
+
+button { 
+    cursor: pointer; 
+    transition: 0.2s ease; 
+    font-family: 'Inter', sans-serif; 
+}
+
+.btn-salvar {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 0.875rem 2rem;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.2);
+}
+
+.btn-salvar:hover { 
+    background: var(--primary-hover); 
+    transform: translateY(-1px); 
+}
+
+.btn-salvar:active { 
+    transform: translateY(0); 
+}
+
+.btn-cancelar {
+    background: transparent;
+    color: var(--text-muted);
+    border: 1px solid var(--border-color);
+    padding: 0.875rem 1.5rem;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.btn-cancelar:hover { 
+    background: var(--bg-input); 
+    color: var(--text-main); 
+}
+
+/* ==========================================================================
+   3. CRÁCHAS (BADGES)
+   ========================================================================== */
+.badge {
+    padding: 0.35rem 0.85rem;
+    border-radius: 2rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.badge.success { 
+    background: rgba(16, 185, 129, 0.15); 
+    color: var(--success); 
+    border: 1px solid rgba(16, 185, 129, 0.3); 
+}
+
+/* ==========================================================================
+   4. ESTRUTURA DOS CARTÕES E FORMULÁRIOS
+   ========================================================================== */
+.form-card {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: 0.75rem;
+    padding: 2rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+}
+
+.form-group { 
+    display: flex; 
+    flex-direction: column; 
+}
+
+.form-group label {
+    color: var(--text-muted);
+    font-size: 0.875rem;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+input[type="date"], select {
+    width: 100%;
+    background-color: var(--bg-input);
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+    padding: 0.875rem 1rem;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+input[type="checkbox"], input[type="radio"] {
+    accent-color: var(--primary);
+}
+
+input:focus, select:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+
+.section-title {
+    font-size: 1.15rem;
+    margin: 0 0 1.25rem 0;
+    color: var(--text-main);
+    font-weight: 600;
+}
+
+.divider { 
+    border-top: 1px solid var(--border-color); 
+    margin: 2rem 0; 
+}
+
+.divider-interna { 
+    border-top: 1px dashed var(--border-color); 
+    margin: 0.5rem 0; 
+}
+
+/* ==========================================================================
+   5. TOTAIS DA NOTA FISCAL / RESUMO MENSAL
+   ========================================================================== */
+.summary-totais {
+    display: flex;
+    justify-content: space-between;
+    gap: 2.5rem;
+    background: rgba(0, 0, 0, 0.25); /* Fundo mais escuro para destaque no Dark Mode */
+    padding: 1.5rem 2rem;
+    border-radius: 0.75rem;
+    border: 1px solid var(--border-color);
+    align-items: center;
+}
+
+.totais-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: flex-end;
+}
+
+.totais-item.align-left {
+    align-items: flex-start;
+}
+
+.totais-item span {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.totais-item strong { 
+    font-size: 1.35rem; 
+    color: var(--text-main); 
+}
+
+.highlight-profit strong { 
+    color: var(--success); 
+    font-size: 1.75rem; 
+}
+
+/* ==========================================================================
+   6. RESPONSIVIDADE
+   ========================================================================== */
+@media (max-width: 768px) {
+    .header, .summary-totais { flex-direction: column; align-items: stretch; gap: 1.5rem; }
+    .form-grid { grid-template-columns: 1fr; }
+    .totais-item { flex-direction: row; justify-content: space-between; align-items: center; width: 100%; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem;}
+    .totais-item.align-left { align-items: center; }
+    .totais-item:last-child { border-bottom: none; padding-bottom: 0;}
+}

@@ -1,0 +1,401 @@
+/* ==========================================================================
+   1. VARIÁVEIS E CONFIGURAÇÃO GLOBAL
+   ========================================================================== */
+/* O :root guarda as cores do sistema. Alterar uma cor aqui muda no site todo. */
+:root {
+    --bg-base: #0f172a;        /* Fundo principal da página (Azul bem escuro) */
+    --bg-surface: #1e293b;     /* Fundo dos cartões e formulários */
+    --bg-input: #334155;       /* Fundo das caixas de texto (inputs) */
+    --border-color: #334155;   /* Cor padrão de todas as bordas e divisórias */
+    
+    --primary: #3b82f6;        /* Azul principal (Botões, destaques, abas ativas) */
+    --primary-hover: #2563eb;  /* Azul mais escuro para efeito de hover (mouse em cima) */
+    --success: #10b981;        /* Verde para ações positivas (Salvar, Lucro) */
+    --warning: #f59e0b;        /* Laranja para alertas (Avisos fiscais) */
+    --danger: #ef4444;         /* Vermelho para erros ou prejuízos */
+    
+    --text-main: #f8fafc;      /* Cor principal do texto (Branco gelo) */
+    --text-muted: #94a3b8;     /* Cor para textos secundários e legendas (Cinza azulado) */
+}
+
+/* Reset básico: remove margens padrão dos navegadores e define a fonte */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Garante que bordas e paddings não aumentem o tamanho total do elemento */
+    font-family: 'Inter', sans-serif;
+}
+
+/* Configuração do corpo da página */
+body {
+    background-color: var(--bg-base);
+    color: var(--text-main);
+    min-height: 100vh; /* Garante que o fundo ocupe pelo menos a tela inteira */
+    padding: 2rem;
+}
+
+/* Container centraliza o conteúdo e limita a largura para não esticar em monitores grandes */
+.container {
+    margin: 0 auto;
+    max-width: 1000px;
+}
+
+/* ==========================================================================
+   2. HEADER E ÁREA DE IMPORTAÇÃO
+   ========================================================================== */
+/* O cabeçalho usa Flexbox para colocar o título de um lado e a importação do outro */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    gap: 2rem;
+}
+
+.header-title h1 {
+    font-size: 1.75rem;
+    color: var(--text-main);
+}
+
+.header-title p {
+    color: var(--text-muted);
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+}
+
+/* Limita o tamanho do bloco de importação e impede que ele encolha (flex-shrink: 0) */
+.import-wrapper {
+    width: 320px;
+    flex-shrink: 0;
+}
+
+/* Estilo da caixa de arrastar planilha */
+.upload-area {
+    background: var(--bg-surface);
+    border: 1px dashed var(--primary); /* Borda tracejada azul */
+    padding: 1rem;
+    border-radius: 0.5rem;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.2s; /* Animação suave ao passar o mouse */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+/* Efeito ao passar o mouse na área de upload */
+.upload-area:hover {
+    background: var(--bg-input);
+}
+
+.upload-area p {
+    color: var(--primary);
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.upload-area small {
+    color: var(--text-muted);
+    font-size: 0.75rem;
+}
+
+.upload-icon {
+    font-size: 1.2rem;
+    color: var(--primary);
+}
+
+/* Classe utilitária para esconder o <input type="file"> real */
+.hidden {
+    display: none !important;
+}
+
+/* ==========================================================================
+   3. SISTEMA DE ABAS (TABS)
+   ========================================================================== */
+/* Container das abas */
+.tabs {
+    display: flex;
+    flex-wrap: wrap; /* Permite que as abas quebrem de linha em telas pequenas */
+    background: rgba(0, 0, 0, 0.2); 
+    padding: 0.4rem;
+    border-radius: 0.5rem;
+    border: 1px solid var(--border-color);
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Botões inativos das abas */
+.tab-btn {
+    flex: 1; /* Faz todas as abas terem a mesma largura */
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    padding: 0.75rem 1rem;
+    border-radius: 0.35rem;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* Efeito ao passar o mouse em abas que NÃO estão ativas */
+.tab-btn:hover:not(.active) {
+    color: var(--text-main);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* Estilo da aba que está selecionada no momento */
+.tab-btn.active {
+    background: var(--primary);
+    color: #ffffff;
+    font-weight: 700;
+    box-shadow: 0 0 15px rgba(59, 130, 246, 0.4); /* Brilho azul ao redor */
+    border: 1px solid var(--primary-hover);
+}
+
+/* Esconde todo o conteúdo por padrão */
+.tab-content { 
+    display: none; 
+}
+
+/* Mostra apenas o conteúdo ativo com uma animação de surgimento */
+.tab-content.active { 
+    display: block; 
+    animation: fadeIn 0.3s; 
+}
+
+/* Animação suave para as abas aparecerem de baixo para cima */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ==========================================================================
+   4. FORMULÁRIO E INPUTS
+   ========================================================================== */
+/* Cartão principal que engloba o formulário */
+.form-card {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: 0.75rem;
+    padding: 2rem;
+}
+
+/* Sistema de Grid para organizar os campos em duas colunas */
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+}
+
+/* Classe utilitária: faz um campo ocupar as duas colunas do Grid */
+.span-2 { 
+    grid-column: span 2; 
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    color: var(--text-muted);
+    font-size: 0.875rem;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+/* Estilo global para todos os campos de digitação */
+input, select, textarea {
+    width: 100%;
+    background-color: var(--bg-input);
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+    padding: 0.875rem 1rem;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    outline: none;
+    transition: 0.2s;
+}
+
+/* Efeito de foco quando o usuário clica dentro do campo */
+input:focus, select:focus, textarea:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2); /* Anel de foco azul */
+}
+
+/* Permite que caixas de texto grandes sejam redimensionadas apenas para baixo */
+textarea { 
+    resize: vertical; 
+}
+
+/* Títulos que separam os blocos dentro do formulário */
+.section-title {
+    font-size: 1.1rem;
+    margin: 1.5rem 0 1.25rem 0; 
+    color: var(--text-main);
+    font-weight: 600;
+}
+
+/* Remove a margem do primeiro título para alinhar com o topo do cartão */
+form > div > .section-title:first-of-type { 
+    margin-top: 0; 
+}
+
+/* Linha separadora horizontal */
+.divider {
+    border-top: 1px solid var(--border-color);
+    margin: 2rem 0;
+}
+
+/* Caixa de aviso (usada na aba Fiscal) */
+.alert-box {
+    background: rgba(245, 158, 11, 0.1);
+    border: 1px solid var(--warning);
+    color: var(--warning);
+    padding: 1rem;
+    border-radius: 6px;
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+}
+
+/* ==========================================================================
+   5. CALCULADORA DE PREÇO E LUCRO (UX/UI)
+   ========================================================================== */
+/* Estrutura dividida da calculadora (Custos de um lado, Venda do outro) */
+.pricing-calculator {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    background: rgba(0, 0, 0, 0.15); /* Fundo sutilmente mais escuro */
+    padding: 1.5rem;
+    border-radius: 0.75rem;
+    border: 1px solid var(--border-color);
+    margin-bottom: 2rem;
+}
+
+.pricing-group {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Títulos menores dentro da calculadora */
+.group-title {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+/* Painéis de resumo (Custo Total e Lucro) */
+.summary-box {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background: var(--bg-surface);
+    border: 1px dashed var(--border-color);
+    border-radius: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.95rem;
+}
+
+.summary-box strong {
+    font-size: 1.1rem;
+    color: var(--text-main);
+}
+
+/* Destaque visual verde para a caixa de Lucro Líquido */
+.highlight-profit {
+    border-color: var(--success);
+    background: rgba(16, 185, 129, 0.05);
+}
+
+.highlight-profit strong {
+    color: var(--success);
+    font-size: 1.25rem;
+}
+
+/* ==========================================================================
+   6. BOTÕES DE AÇÃO (SALVAR / CANCELAR)
+   ========================================================================== */
+/* Container dos botões joga eles para a direita */
+.actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-color);
+}
+
+/* Estilo do botão principal */
+.btn-salvar {
+    background: var(--success);
+    color: white;
+    border: none;
+    padding: 0.875rem 2rem;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn-salvar:hover { 
+    background: #059669; /* Verde mais escuro no hover */
+}
+
+/* Estilo do botão secundário (fantasma) */
+.btn-cancelar {
+    background: transparent;
+    color: var(--text-muted);
+    border: 1px solid var(--border-color);
+    padding: 0.875rem 1.5rem;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn-cancelar:hover {
+    background: var(--bg-input);
+    color: var(--text-main);
+}
+
+/* ==========================================================================
+   7. RESPONSIVIDADE (Telas menores e Celulares)
+   ========================================================================== */
+/* Tudo dentro deste bloco só se aplica em telas menores que 768px */
+@media (max-width: 768px) {
+    /* O Header empilha o título e a área de importação */
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.5rem;
+    }
+    
+    /* A importação passa a ocupar 100% da tela */
+    .import-wrapper { 
+        width: 100%; 
+    }
+    
+    /* O Grid do formulário e da calculadora deixam de ter 2 colunas e passam a ter 1 */
+    .form-grid, .pricing-calculator { 
+        grid-template-columns: 1fr; 
+    }
+    
+    /* Campos que ocupavam duas colunas voltam a ocupar apenas uma */
+    .span-2 { 
+        grid-column: span 1; 
+    }
+    
+    /* As abas empilham uma embaixo da outra */
+    .tabs { 
+        flex-direction: column; 
+    }
+}

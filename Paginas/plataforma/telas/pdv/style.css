@@ -1,0 +1,572 @@
+/* ==========================================================================
+   1. VARIÁVEIS E TEMAS (Dark Mode Premium)
+   ========================================================================== */
+:root {
+    /* Paleta de Cores - Slate (Base escura e elegante) */
+    --bg-base: #0f172a;       /* Fundo principal */
+    --bg-surface: #1e293b;    /* Paineis e modais */
+    --bg-input: #334155;      /* Campos de digitação */
+    
+    /* Bordas e Divisores */
+    --border-color: #334155;
+    
+    /* Cores de Ação (Acentos) */
+    --primary: #3b82f6;       /* Azul Premium */
+    --primary-hover: #2563eb;
+    --success: #10b981;       /* Verde Sucesso */
+    --warning: #f59e0b;       /* Amarelo Alerta */
+    --danger: #ef4444;        /* Vermelho Erro/Remover */
+    
+    /* Textos */
+    --text-main: #f8fafc;     /* Texto Principal (Branco suave) */
+    --text-muted: #94a3b8;    /* Texto Secundário (Cinza) */
+}
+
+/* ==========================================================================
+   2. RESET GLOBAL
+   ========================================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background-color: var(--bg-base);
+    color: var(--text-main);
+    display: grid;
+    grid-template-columns: 240px 1fr 340px; /* Layout: Menu | Centro | Resumo */
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* Scrollbar Customizada (Dark) */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+
+/* ==========================================================================
+   3. MENU LATERAL (SIDEBAR)
+   ========================================================================== */
+.sidebar {
+    background-color: var(--bg-surface);
+    border-right: 1px solid var(--border-color);
+    padding: 1.5rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.brand {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-main);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+    padding: 0 0.5rem;
+}
+
+.brand i {
+    color: var(--primary);
+    font-size: 1.75rem;
+}
+
+.menu-item {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    padding: 0.875rem 1rem;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: left;
+}
+
+.menu-item i {
+    font-size: 1.25rem;
+}
+
+.menu-item:hover {
+    background-color: var(--bg-input);
+    color: var(--text-main);
+}
+
+.menu-item.active {
+    background-color: rgba(59, 130, 246, 0.1);
+    color: var(--primary);
+    border-left: 4px solid var(--primary);
+}
+
+.menu-shortcut {
+    margin-left: auto;
+    background-color: var(--bg-input);
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+/* ==========================================================================
+   4. ÁREA CENTRAL (MAIN)
+   ========================================================================== */
+.main-content {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    overflow-y: auto;
+}
+
+/* Barra de Pesquisa */
+.search-bar {
+    display: flex;
+    gap: 1rem;
+}
+
+.input-group {
+    flex: 1;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-group i {
+    position: absolute;
+    left: 1rem;
+    font-size: 1.5rem;
+    color: var(--text-muted);
+}
+
+.input-group input {
+    width: 100%;
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+    padding: 1rem 1rem 1rem 3.5rem;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    outline: none;
+    transition: 0.2s;
+}
+
+.input-group input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+
+/* Botão Primário */
+.btn-primary {
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    padding: 0 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: 0.2s;
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-hover);
+}
+
+/* Carrinho de Compras */
+.cart-container {
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: 0.5rem;
+    flex: 1;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.cart-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.cart-table th {
+    background-color: rgba(0, 0, 0, 0.2);
+    color: var(--text-muted);
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-align: left;
+    padding: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.cart-table td {
+    border-bottom: 1px solid var(--border-color);
+    color: var(--text-main);
+    /* O padding foi movido para o JS para controle individual das células, 
+       mas podemos manter um fallback aqui */
+    padding: 1rem; 
+}
+
+/* Estado Vazio do Carrinho */
+.empty-state {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    text-align: center;
+}
+
+.empty-state i {
+    font-size: 4rem;
+    opacity: 0.2;
+    margin-bottom: 1rem;
+}
+
+/* ==========================================================================
+   5. PAINEL DE CHECKOUT (ASIDE)
+   ========================================================================== */
+.checkout-panel {
+    background-color: var(--bg-surface);
+    border-left: 1px solid var(--border-color);
+    padding: 2rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.summary-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+    color: var(--text-main);
+}
+
+.total-section {
+    margin-top: auto;
+    margin-bottom: 1.5rem;
+    background-color: var(--bg-base);
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    border: 1px solid var(--border-color);
+}
+
+.total-label {
+    color: var(--text-muted);
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.total-value {
+    color: var(--primary);
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+.btn-checkout {
+    background-color: var(--success);
+    color: white;
+    border: none;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    font-size: 1.25rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.2s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-checkout:hover {
+    background-color: #059669; /* Verde mais escuro no hover */
+    transform: translateY(-2px);
+}
+
+/* ==========================================================================
+   6. MODAIS (SOBREPOSIÇÕES)
+   ========================================================================== */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(4px);
+    display: none; /* Oculto por padrão, ativado via JS */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-box {
+    background-color: var(--bg-surface);
+    width: 100%;
+    max-width: 500px;
+    border-radius: 0.75rem;
+    padding: 2rem;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    display: none; /* Controlado via JS */
+    animation: modalSlideIn 0.3s ease-out;
+}
+
+@keyframes modalSlideIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.modal-header h2 {
+    font-size: 1.25rem;
+    color: var(--text-main);
+}
+
+.btn-close {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn-close:hover {
+    color: var(--danger);
+}
+
+/* Formulários em Modais */
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    display: block;
+    color: var(--text-muted);
+    font-size: 0.875rem;
+    margin-bottom: 0.5rem;
+}
+
+.form-control {
+    width: 100%;
+    background-color: var(--bg-input);
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+    padding: 0.875rem 1rem;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    outline: none;
+    transition: 0.2s;
+}
+
+.form-control:focus {
+    border-color: var(--primary);
+}
+
+/* Componentes Específicos do Modal de Pagamento */
+.modal-total {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--success);
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.payment-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.payment-method {
+    background-color: var(--bg-input);
+    border: 2px solid transparent;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.2s;
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+.payment-method i {
+    display: block;
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.payment-method:hover {
+    background-color: var(--border-color);
+}
+
+.payment-method.selected {
+    border-color: var(--primary);
+    color: var(--primary);
+    background-color: rgba(59, 130, 246, 0.1);
+}
+
+/* Tabela de Histórico no Modal */
+.modal-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.modal-table th {
+    background-color: rgba(0,0,0,0.2);
+    padding: 0.75rem;
+    text-align: left;
+    font-size: 0.875rem;
+    color: var(--text-muted);
+}
+
+.modal-table td {
+    padding: 0.75rem;
+    border-bottom: 1px solid var(--border-color);
+    font-size: 0.875rem;
+    color: var(--text-main);
+}
+
+.modal-table tr:last-child td {
+    border-bottom: none;
+}
+
+/* ==========================================================================
+   7. STATUS DO CAIXA E BOTÕES
+   ========================================================================== */
+.status-caixa {
+    padding: 1rem; 
+    border-radius: 0.5rem; 
+    display: flex; 
+    gap: 0.75rem; 
+    align-items: center; 
+    margin-bottom: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.status-caixa.fechado {
+    background: rgba(239, 68, 68, 0.1); 
+    border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.status-caixa.aberto {
+    background: rgba(16, 185, 129, 0.1); 
+    border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.status-caixa.fechado i { color: var(--danger); font-size: 1.5rem; }
+.status-caixa.aberto i { color: var(--success); font-size: 1.5rem; }
+
+.status-title { font-size: 0.875rem; font-weight: 600; color: var(--text-main); }
+.status-sub { font-size: 0.75rem; color: var(--text-muted); }
+
+/* Novos Botões Específicos */
+.btn-success {
+    background-color: var(--success);
+    color: white; 
+    border: none; 
+    border-radius: 0.5rem; 
+    font-weight: 600; 
+    cursor: pointer; 
+    transition: 0.2s;
+}
+
+.btn-success:hover { 
+    background-color: #059669; 
+}
+
+.btn-danger {
+    background-color: var(--danger);
+    color: white; 
+    border: none; 
+    border-radius: 0.5rem; 
+    font-weight: 600; 
+    cursor: pointer; 
+    transition: 0.2s;
+}
+
+.btn-danger:hover { 
+    background-color: #dc2626; 
+}
+
+
+/* ==========================================================================
+   8. BOTÕES DE AÇÃO DO PAINEL (Suspender / Cancelar)
+   ========================================================================== */
+.action-buttons-container {
+    display: flex;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+    width: 100%;
+    
+}
+
+.btn-action {
+    flex: 1; /* Faz os dois botões terem exatamente a mesma largura (50/50) */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0rem;
+    padding: 0.875rem 0.5rem; /* Mais "gordinho" e confortável para clicar */
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: inherit; /* Força a usar a fonte Inter e não a do navegador */
+    outline: none;
+}
+
+.btn-action i {
+    font-size: 1.25rem;
+}
+
+/* Estilo do botão "Suspender" */
+.btn-outline {
+    background-color: var(--bg-input);
+    color: var(--text-muted);
+    border: 1px solid var(--border-color);
+}
+
+.btn-outline:hover {
+    background-color: rgba(245, 158, 11, 0.05); /* Fundo amarelado suave */
+    color: var(--warning);
+    border-color: rgba(245, 158, 11, 0.3);
+}
+
+/* Estilo do botão "Cancelar" */
+.btn-danger-outline {
+    background-color: rgba(239, 68, 68, 0.05);
+    color: var(--danger);
+    border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.btn-danger-outline:hover {
+    background-color: rgba(239, 68, 68, 0.15);
+    border-color: rgba(239, 68, 68, 0.4);
+}
+
+.btn-danger-outline span {
+    font-size: 0.7rem;
+    opacity: 0.6;
+    font-weight: 400;
+}

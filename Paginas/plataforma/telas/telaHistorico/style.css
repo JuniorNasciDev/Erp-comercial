@@ -1,0 +1,260 @@
+/* Configurações básicas e tipografia */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #121212; /* Fundo escuro como na imagem */
+    color: #e0e0e0; /* Texto claro padrão */
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding-top: 40px; /* Espaço no topo */
+}
+
+/* Container centralizado para a tela */
+.dashboard-container {
+    width: 1000px; /* Largura ideal para um layout de cartões */
+    max-width: 95%; /* Responsividade para telas menores */
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Estilização do cabeçalho */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 10px;
+}
+
+.title-group h1 {
+    font-size: 28px;
+    font-weight: 700;
+    margin: 0;
+    color: #ffffff;
+}
+
+.title-group p {
+    font-size: 14px;
+    color: #aaaaaa; /* Texto secundário cinza */
+    margin: 5px 0 0 0;
+}
+
+/* Estilização do filtro de data (dropdown) */
+.date-filter {
+    background-color: #1a1a1a; /* Fundo dos cartões */
+    color: #ffffff;
+    border: 1px solid #333; /* Borda sutil */
+    border-radius: 6px;
+    padding: 8px 12px;
+    font-size: 14px;
+    cursor: pointer;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.date-filter:hover {
+    border-color: #555;
+}
+
+/* Área de conteúdo principal */
+.main-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Cartões de métricas superiores */
+.metric-cards {
+    display: flex;
+    gap: 20px;
+}
+
+/* Estilo base para todos os cartões */
+.card {
+    background-color: #1a1a1a; /* Cor de fundo idêntica à da imagem */
+    border-radius: 12px; /* Arredondamento sutil */
+    border: 1px solid #333; /* Borda sutil */
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Sombra para profundidade */
+}
+
+/* Específico para cartões de métrica */
+.metric-card {
+    flex: 1; /* Divide o espaço igualmente */
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.icon {
+    font-size: 24px;
+}
+
+.metric-info h3 {
+    font-size: 13px;
+    color: #aaaaaa;
+    margin: 0;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.metric-info .value {
+    font-size: 28px;
+    font-weight: 700;
+    margin: 8px 0 0 0;
+    color: #ffffff;
+}
+
+.metric-info .unit {
+    font-size: 14px;
+    color: #888888;
+    font-weight: normal;
+}
+
+/* Valor positivo em verde, como na imagem */
+.metric-info .positive {
+    color: #4caf50; 
+}
+
+/* Grande cartão do histórico */
+.history-card {
+    padding: 25px; /* Mais espaço para a tabela */
+}
+
+.card-header h3 {
+    font-size: 18px;
+    margin: 0 0 20px 0;
+    color: #ffffff;
+}
+
+/* Estilização da tabela de histórico */
+.history-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    color: #dddddd;
+}
+
+.history-table th, .history-table td {
+    text-align: left;
+    padding: 12px 15px;
+    border-bottom: 1px solid #333; /* Linhas de separação */
+}
+
+.history-table th {
+    font-weight: 600;
+    color: #aaaaaa;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 0.05em;
+    padding-top: 0; /* Alinha com o título do cartão */
+}
+
+/* Destaque para o valor total na tabela */
+.total-value {
+    color: #ffffff;
+    font-weight: 600;
+}
+
+/* Estilos de status para clareza */
+.status {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.status-completed {
+    background-color: #2e7d32; /* Verde suave */
+    color: #ffffff;
+}
+
+.status-pending {
+    background-color: #fbc02d; /* Amarelo suave */
+    color: #121212; /* Texto escuro no fundo amarelo */
+}
+
+/* Estilização da paginação */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-top: 25px;
+}
+
+.btn-pagination {
+    background-color: #333; /* Cinza escuro para botões secundários */
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 16px;
+    cursor: pointer;
+    font-size: 13px;
+    transition: background-color 0.2s;
+}
+
+.btn-pagination:hover {
+    background-color: #444;
+}
+
+.page-num {
+    font-size: 13px;
+    color: #aaaaaa;
+}
+
+
+/*  card header  */
+
+
+/* Atualização do cabeçalho do cartão para alinhar o título e a pesquisa lado a lado */
+.history-card .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.history-card .card-header h3 {
+    margin: 0; /* Remove a margem original para alinhar perfeitamente */
+}
+
+/* Estilização da barra de pesquisa */
+.search-bar {
+    display: flex;
+    align-items: center;
+    background-color: #121212; /* Fundo um pouco mais escuro que o cartão para dar contraste */
+    border: 1px solid #333;
+    border-radius: 6px;
+    padding: 8px 12px;
+    transition: border-color 0.2s;
+}
+
+/* Efeito quando o usuário clica para digitar */
+.search-bar:focus-within {
+    border-color: #fbc02d; /* Usa a cor de destaque (amarela) do alerta da sua imagem original */
+}
+
+.search-icon {
+    font-size: 14px;
+    color: #888888;
+    margin-right: 8px;
+}
+
+.search-input {
+    background: transparent;
+    border: none;
+    color: #ffffff;
+    font-size: 14px;
+    outline: none;
+    width: 220px; /* Largura confortável para digitar IDs */
+    font-family: inherit;
+}
+
+.search-input::placeholder {
+    color: #666666;
+}

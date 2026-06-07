@@ -1,0 +1,114 @@
+/* Bolinha de cor da categoria */
+.color-tag {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid #333;
+}
+
+/* Ajuste para o formulário no modal */
+.form-row {
+    display: flex;
+    gap: 15px;
+}
+
+
+/* ==========================================================================
+   MÓDULO DE CATEGORIAS - CSS ADICIONAL
+   ========================================================================== */
+
+/* Container específico para a tela de categorias, mantendo o padrão */
+.dashboard-container {
+    width: 1100px;
+    max-width: 95%;
+    margin: 0 auto;
+    padding-top: 40px;
+}
+
+/* Bolinha indicadora de cor (Tag visual) */
+.color-tag {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid #2a2a2a;
+    box-shadow: 0 0 5px rgba(0,0,0,0.3);
+}
+
+/* Alinhamento dos campos no Modal de Categorias */
+.form-row {
+    display: flex;
+    gap: 15px;
+    align-items: flex-end;
+}
+
+/* Ajustes finos para o input de cor dentro do formulário */
+input[type="color"] {
+    background-color: #121212;
+    border: 1px solid #333;
+    padding: 4px;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+/* Estilização da tabela de categorias */
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.data-table th, .data-table td {
+    padding: 16px;
+    border-bottom: 1px solid #2a2a2a;
+    text-align: left;
+}
+
+/* Estilo específico para o nome da categoria com destaque */
+.category-name {
+    color: #ffffff;
+    font-weight: 600;
+}
+
+/* Botões de Ação na Tabela de Categorias */
+.btn-icon {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 8px;
+    transition: transform 0.2s, opacity 0.2s;
+    opacity: 0.7;
+}
+
+.btn-icon:hover {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+/* Ajuste de margem para o cabeçalho desta tela */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+/* Estilo de "placeholder" ou texto sem categoria caso necessário */
+.text-muted {
+    color: #666;
+    font-style: italic;
+}
+
+/* Garante que a coluna de descrição não fique gigante */
+.data-table td {
+    max-width: 250px; /* Largura máxima da célula de descrição */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Permite que o usuário veja o texto completo ao passar o mouse */
+.data-table td:hover {
+    white-space: normal;
+    background-color: #252525;
+}

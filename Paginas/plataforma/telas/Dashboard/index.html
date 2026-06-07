@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<head>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+ <div class="dash-container">
+
+ <header class="dash-header">
+    <div class="header-titles">
+      <h1 class="dash-title">Resumo de Vendas</h1>
+      <p class="dash-subtitle">Acompanhe as principais métricas do seu negócio.</p>
+    </div>
+
+    <div class="dash-filters">
+      <select class="filter-select" id="periodFilter">
+        <option value="hoje">Hoje</option>
+        <option value="semana">Esta Semana</option>
+        <option value="mes">Este Mês</option>
+        <option value="personalizado">Período Personalizado...</option>
+      </select>
+
+      <div class="custom-date hidden" id="customDateBox">
+        <input type="date" class="date-input" id="dateStart">
+        <span class="date-separator">até</span>
+        <input type="date" class="date-input" id="dateEnd">
+      </div>
+    </div>
+  </header>
+
+  <section class="dash-metrics">
+    
+    <div class="metric-card">
+      <div class="metric-header">
+        <span class="metric-icon">💰</span>
+        <h3 class="metric-title">Faturamento Diário</h3>
+      </div>
+      <div class="metric-value text-green">R$ 1.250,00</div>
+    </div>
+
+    <div class="metric-card">
+      <div class="metric-header">
+        <span class="metric-icon">📦</span>
+        <h3 class="metric-title">Vendas Realizadas</h3>
+      </div>
+      <div class="metric-value">45 <span class="metric-suffix">itens</span></div>
+    </div>
+
+  </section>
+
+  <section class="dash-panels">
+    
+    <div class="panel">
+      <div class="panel-header">
+        <span class="panel-icon">📈</span>
+        <h3 class="panel-title">Top 3 Mais Vendidos</h3>
+      </div>
+      
+      <ul class="item-list">
+        <li class="item-row">
+          <div class="item-info">
+            <span class="item-rank">1</span>
+            <span class="item-name">Coca-Cola 2L</span>
+          </div>
+          <span class="item-badge">15 un</span>
+        </li>
+        <li class="item-row">
+          <div class="item-info">
+            <span class="item-rank">2</span>
+            <span class="item-name">Pão Francês</span>
+          </div>
+          <span class="item-badge">30 un</span>
+        </li>
+        <li class="item-row">
+          <div class="item-info">
+            <span class="item-rank">3</span>
+            <span class="item-name">Carvão 3kg</span>
+          </div>
+          <span class="item-badge">08 un</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="panel alert-panel">
+      <div class="panel-header">
+        <span class="panel-icon text-warning">⚠️</span>
+        <h3 class="panel-title text-warning">Alertas de Estoque Baixo</h3>
+      </div>
+      
+      <ul class="item-list">
+        <li class="item-row">
+          <div class="item-info">
+            <span class="item-name">Detergente</span>
+            <span class="item-desc">(Restam 2 unidades)</span>
+          </div>
+          <button class="btn-action">Repor</button>
+        </li>
+      </ul>
+    </div>
+
+  </section>
+
+</div>
+  
+<script src="script.js"></script>
+</body>
+</html>

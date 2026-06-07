@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro - PDV Pro</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <main class="main-content">
+        <header class="page-header">
+            <div>
+                <h1 class="page-title">Cadastro de Contatos</h1>
+                <p class="page-subtitle">Gerencie os contatos da sua loja</p>
+            </div>
+            
+            <div class="tabs-container">
+                <button class="tab-btn active" id="tabCliente">Cliente</button>
+                <button class="tab-btn" id="tabFornecedor">Fornecedor</button>
+            </div>
+        </header>
+
+        <div id="cadastroContexto" class="form-card">
+            
+            <div id="telaCliente">
+                <div class="radio-group">
+                    <label class="radio-label">
+                        <input type="radio" name="tipoPessoaCli" value="PF" checked> <span>Pessoa Física (PF)</span>
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="tipoPessoaCli" value="PJ"> <span>Pessoa Jurídica (PJ)</span>
+                    </label>
+                </div>
+
+                <hr class="divider">
+
+                <h3 class="section-title"><i class='bx bx-user'></i> Dados Cliente</h3>
+                <div class="form-grid">
+                    <div class="form-group span-2">
+                        <label id="lblNomeCli">Nome Completo <span class="required">*</span></label>
+                        <input type="text" id="nomeCli" class="form-control" placeholder="Nome do cliente">
+                    </div>
+                    <div class="form-group">
+                        <label id="lblDocCli">CPF <span class="required">*</span></label>
+                        <input type="text" id="docCli" class="form-control" placeholder="Apenas números">
+                    </div>
+                    <div class="form-group">
+                        <label>Data de Nascimento</label>
+                        <input type="date" id="dataNasc" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Telefone / WhatsApp <span class="required">*</span></label>
+                        <input type="tel" id="telCli" class="form-control" placeholder="(00) 00000-0000">
+                    </div>
+                    <div class="form-group">
+                        <label>E-mail</label>
+                        <input type="email" id="emailCli" class="form-control" placeholder="cliente@exemplo.com">
+                    </div>
+                </div>
+
+                <h3 class="section-title"><i class='bx bx-trending-up'></i> CRM e Perfil de Compra</h3>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Segmento</label>
+                        <select id="segmento" class="form-control">
+                            <option value="novo">Novo Cliente</option>
+                            <option value="padrao" selected>Cliente Padrão</option>
+                            <option value="vip">Cliente VIP</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Canal de Origem</label>
+                        <select id="origem" class="form-control">
+                            <option value="">Como nos conheceu?</option>
+                            <option value="instagram">Instagram</option>
+                            <option value="whatsapp">WhatsApp</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Limite de Crédito (R$)</label>
+                        <input type="number" id="limiteCredito" class="form-control" placeholder="0.00" step="0.01">
+                    </div>
+                    
+                    <div class="form-group span-3">
+                        <label>Tags / Interesses</label>
+                        <input type="text" id="tagsCrm" class="form-control" placeholder="Ex: fitness, calçados">
+                    </div>
+                    
+                    <div class="form-group span-3">
+                        <label>Observações Internas (CRM)</label>
+                        <textarea id="obsCrm" class="form-control" rows="3" placeholder="Preferências de compra, tamanhos, alertas de crédito..."></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div id="telaFornecedor" class="hidden">
+    <div class="radio-group">
+        <label class="radio-label">
+            <input type="radio" name="tipoPessoaFor" value="PJ" checked> <span>Pessoa Jurídica (PJ)</span>
+        </label>
+        <label class="radio-label">
+            <input type="radio" name="tipoPessoaFor" value="PF"> <span>Pessoa Física (PF)</span>
+        </label>
+    </div>
+
+    <hr class="divider">
+
+    <h3 class="section-title"><i class='bx bx-truck'></i> Dados do Fornecedor</h3>
+    <div class="form-grid">
+        
+        <div class="form-group span-3">
+            <label id="lblNomeFor">Razão Social</label>
+            <input type="text" id="nomeFor" class="form-control" placeholder="Nome da empresa">
+        </div>
+        
+        <div class="form-group span-2">
+            <label id="lblDocFor">CNPJ</label>
+            <input type="text" id="docFor" class="form-control" placeholder="00.000.000/0000-00">
+        </div>
+        <div class="form-group">
+            <label>Prazo Pagamento (Dias)</label>
+            <input type="number" id="prazoFor" class="form-control" placeholder="Ex: 30">
+        </div>
+        
+    </div>
+</div>
+            <h3 class="section-title"><i class='bx bx-map'></i> Endereço</h3>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>CEP</label>
+                    <input type="text" id="cep" class="form-control" placeholder="00000-000">
+                </div>
+                <div class="form-group span-2">
+                    <label>Logradouro (Rua/Av)</label>
+                    <input type="text" id="logradouro" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Número</label>
+                    <input type="text" id="numero" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Complemento</label>
+                    <input type="text" id="complemento" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Bairro</label>
+                    <input type="text" id="bairro" class="form-control">
+                </div>
+                
+                <div class="form-group span-2">
+                    <label>Cidade</label>
+                    <input type="text" id="cidade" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>UF</label>
+                    <select id="uf" class="form-control">
+                        <option value="">Selecione</option>
+                        <option value="SP">SP</option>
+                        <option value="RJ">RJ</option>
+                        <option value="MG">MG</option>
+                    </select>
+                </div>
+            </div>
+
+            <hr class="divider">
+
+            <div class="form-actions">
+                <button type="button" class="btn-cancel" id="btnLimpar">Limpar</button>
+                <button type="button" class="btn-save" id="btnSalvar"><i class='bx bx-save'></i> Salvar Cadastro</button>
+            </div>
+
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

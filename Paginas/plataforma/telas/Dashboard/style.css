@@ -1,0 +1,268 @@
+/* Importa a fonte 'Inter', padrão de mercado para sistemas e Dashboards */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* RESET BÁSICO E BARRA DE ROLAGEM */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif; /* Força a fonte moderna em tudo */
+}
+
+body {
+  background-color: transparent; /* Mantém o fundo que vem do sistema principal */
+  color: #e4e6eb;
+}
+
+/* Esconde a barra de rolagem feia do navegador, mas permite rolar a página */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #2a2d35;
+  border-radius: 10px;
+}
+
+/* =========================================
+   ESTRUTURA PRINCIPAL
+   ========================================= */
+
+/* Limita a largura do dashboard para não esticar demais em telas gigantes */
+.dash-container {
+  max-width: 1000px;
+  margin: 0 auto; /* Centraliza na tela */
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px; /* Espaçamento entre os grandes blocos (Cabeçalho > Métricas > Painéis) */
+}
+
+/* --- CABEÇALHO --- */
+.dash-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 4px;
+}
+.dash-subtitle {
+  color: #8a8d98;
+  font-size: 1rem;
+}
+
+/* --- CARTÕES DE MÉTRICAS (Topo) --- */
+.dash-metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Deixa os cartões lado a lado e responsivos */
+  gap: 24px;
+}
+
+.metric-card {
+  background-color: #16181d; /* Cor de fundo idêntica ao PDV */
+  border: 1px solid #2a2d35; /* Borda bem sutil */
+  border-radius: 16px; /* Bordas arredondadas e modernas */
+  padding: 24px;
+  transition: transform 0.2s, border-color 0.2s; /* Efeito suave ao passar o mouse */
+}
+
+/* Efeito Hover (passar o mouse) no cartão */
+.metric-card:hover {
+  transform: translateY(-4px); /* Sobe um pouquinho */
+  border-color: #4ade80; /* Borda brilha em verde */
+}
+
+.metric-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.metric-title {
+  font-size: 0.95rem;
+  color: #a0a5b1;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 600;
+}
+
+.metric-value {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.metric-suffix {
+  font-size: 1rem;
+  color: #8a8d98;
+  font-weight: 500;
+}
+
+/* --- PAINÉIS SECUNDÁRIOS (Listas) --- */
+.dash-panels {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); /* Duas colunas em telas grandes */
+  gap: 24px;
+}
+
+.panel {
+  background-color: #16181d;
+  border: 1px solid #2a2d35;
+  border-radius: 16px;
+  padding: 24px;
+}
+
+/* Borda laranja no painel de alerta para chamar a atenção */
+.alert-panel {
+  border-color: rgba(251, 191, 36, 0.3);
+}
+
+.panel-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #2a2d35; /* Linha divisória abaixo do título */
+  padding-bottom: 16px;
+}
+
+.panel-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+/* --- LISTAS DE ITENS (Dentro dos painéis) --- */
+.item-list {
+  list-style: none; /* Tira os pontinhos padrão do HTML */
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.item-row {
+  display: flex;
+  justify-content: space-between; /* Joga o nome para a esquerda e a quantidade para a direita */
+  align-items: center;
+  padding: 12px 16px;
+  background-color: #1e2025; /* Fundo levemente mais claro que o painel */
+  border-radius: 8px;
+  transition: background-color 0.2s;
+}
+
+.item-row:hover {
+  background-color: #2a2d35; /* Fica mais claro ao passar o mouse */
+}
+
+.item-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.item-rank {
+  color: #8a8d98;
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+.item-name {
+  color: #e4e6eb;
+  font-weight: 500;
+}
+
+.item-desc {
+  color: #fbbf24; /* Cor de aviso para a quantidade restante */
+  font-size: 0.85rem;
+}
+
+/* A "pílula" de quantidade na direita */
+.item-badge {
+  background-color: #16181d;
+  border: 1px solid #2a2d35;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #e4e6eb;
+}
+
+/* Botão de repor estoque */
+.btn-action {
+  background-color: #fbbf24;
+  color: #121418;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.btn-action:hover {
+  opacity: 0.8;
+}
+
+/* --- CORES ÚTEIS --- */
+.text-green { color: #4ade80 !important; }
+.text-warning { color: #fbbf24 !important; }
+
+
+/* css do filtro */
+
+
+
+/* --- CABEÇALHO COM FLEXBOX --- */
+.dash-header {
+  display: flex;
+  justify-content: space-between; /* Título de um lado, Filtro do outro */
+  align-items: center;
+  flex-wrap: wrap; /* Se a tela for pequena, o filtro cai para a linha de baixo */
+  gap: 20px;
+}
+
+/* --- ESTILO DO FILTRO DE DATAS --- */
+.dash-filters {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.filter-select, .date-input {
+  background-color: #16181d;
+  border: 1px solid #2a2d35;
+  color: #e4e6eb;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-family: 'Inter', sans-serif;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+/* Efeito ao clicar no filtro */
+.filter-select:focus, .date-input:focus {
+  border-color: #4ade80;
+  box-shadow: 0 0 0 3px rgba(74, 222, 128, 0.1);
+}
+
+/* Área de datas personalizadas */
+.custom-date {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: opacity 0.3s ease;
+}
+
+.date-separator {
+  color: #8a8d98;
+  font-size: 0.9rem;
+}
+
+/* Classe para esconder as datas personalizadas por padrão */
+.hidden {
+  display: none !important;
+}
